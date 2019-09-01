@@ -31,3 +31,121 @@
     transform: rotate(360deg);
   }
 }
+
+#container {
+  width: 1080px;
+  margin: 0px auto;
+  background-color: #FFFFCA;
+}
+
+#logo {
+  height: 60px;
+  background-color: #771700;
+}
+
+#logo h1 {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  line-height: 19.8px;
+  padding: 20px;
+  color: #FF9200;
+}
+
+#nav-bar {
+  height: 60px;
+  background-color: #771700;
+
+}
+
+#nav-bar ul {
+  margin: 0 20px;
+  padding: 0;
+  text-decoration: none;
+}
+
+#nav-bar li {
+  height: 60px;
+  display: block;
+  float: left;
+}
+#nav-bar li a{
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  height: 20px;
+  color: #FFFFCA;
+}
+
+#nav-bar li a:hover {
+  background-color: #FF9200;
+  color: #771700;
+}
+#left-side {
+  width: 260px;
+  height: 600px;
+  float: left;
+}
+
+#search-box {
+  margin-top: 20px;
+  height: 400px;
+  background-color: #FF9200;
+}
+
+#right-side {
+  width: 820px;
+  float: right;
+}
+
+#right-side-inner {
+  height: 600px;
+  margin: 20px;
+}
+
+.apartment {
+  height: 220px;
+  background-color: #C9C6C4;
+}
+
+.apartment .img {
+  width: 180px;
+  height: 180px;
+  background-color: #A6A4A2;
+  float: left;
+  margin: 20px;
+}
+
+.apartment .description-content {
+  width: 540px;
+  height: 180px;
+  background-color: #C9C6C4;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.apartment .description-content h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.apartment .description-content p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 0;
+}
+
+#footer {
+  height: 40px;
+  background-color: black;
+}
+
+.clear {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
