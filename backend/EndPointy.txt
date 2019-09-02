@@ -1,0 +1,11 @@
+# Lista endpointów - backend
+
+# GET Informacje o hotelu o konkretnym id - @id (np. 1)
+/hotel/show/@id
+
+# GET Lista hoteli + szczegółowe informacje + paginacja oznaczona jako id startowy @start(np. 0) oraz końcowy @end(np. 20)
+/hotel/show/all/@start/@end
+
+# GET Informacje o pokoju o konkretnym id - @id (np. 2)
+/room/show/@id
+

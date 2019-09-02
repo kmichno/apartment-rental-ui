@@ -1,0 +1,7 @@
+module.exports.databaseOptions= {
+    host     : 'host',
+    database : 'db',
+    user     : 'user',
+    password : 'pass',
+    port     : '3306'
+};
