@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import {MainPage} from './Components/MainPage';
+import MainPage from './Components/MainPage';
 import {Podstrona} from './Components/podstrona';
 export default (
     <React.Fragment>​
