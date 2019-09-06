@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-class MainPage extends Component {
+class ApartmentDetails extends Component {
 
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
+        console.log(this.props.match.params.idApartment);
+        console.log("fsfsf");
         this.state = {
-            apartments: [],
+            apartment: 0,
+            idApartment: this.props.match.params.idApartment,
         };
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/hotel/show/all/0/10";
+        var url = "http://localhost:8080/hotel/show/"+this.state.idApartment;
 
         fetch(url, {
             mode: 'cors',
@@ -27,27 +30,7 @@ class MainPage extends Component {
                 return results.json();
             }).then(results => {
             console.log(results.result);
-            let apartments = results.result.map((apartment) => {
-                return (
-                    <div className="apartment" key={apartment.id}>
-                        <div className="img">
-
-                        </div>
-                        <div className="description-content">
-                            <h3>{apartment.nameHotel}</h3>
-                            <p className="city">{apartment.city}</p>
-                            <div className="description">{apartment.description}</div>
-                            <div className="price">
-                                <p>Cena: {apartment.priceDay} zł</p>
-                            </div>
-                            <div className="place-button">
-                                <div className="button"><NavLink to={`apartment/details/${apartment.idHotel}`}>Zobacz szczegóły</NavLink></div>
-                            </div>
-                        </div>
-                    </div>
-            )
-            });
-            this.setState({apartments: apartments})
+            this.setState({apartment: results.result})
         })
     }
 
@@ -73,9 +56,27 @@ class MainPage extends Component {
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <h1>
-                                    Wybierz apartament:
+                                    Wybrany apartament:
                                 </h1>
-                                {this.state.apartments}
+                                <div className="apartment" key={this.state.apartment.id}>
+                                    <div className="img">
+
+                                    </div>
+                                    <div className="description-content">
+                                        <h3>{this.state.apartment.nameHotel}</h3>
+                                        <p className="city">{this.state.apartment.city}</p>
+                                        <div className="description">{this.state.apartment.description}</div>
+                                        <p className="additional-info">Dodatkowe informacje</p>
+                                        <div className="additional-description">{this.state.apartment.additionalDescription}</div>
+                                        <div className="price">
+                                            <p>Max. ilość ludzi: {this.state.apartment.numberPeople}</p>
+                                            <p>Cena: {this.state.apartment.priceDay} zł</p>
+                                        </div>
+                                        <div className="place-button">
+                                            <div className="button"><NavLink to="/">Rezerwuje</NavLink></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="clear"></div>
@@ -87,4 +88,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default ApartmentDetails;

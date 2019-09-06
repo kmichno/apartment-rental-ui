@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import MainPage from './Components/MainPage';
-import {Podstrona} from './Components/podstrona';
+import ApartmentDetails from './Components/ApartmentDetails';
 export default (
     <React.Fragment>​
         <Route exact path="/" component={MainPage} myname={"Main page"}/>
-        <Route path="/podstrona" component={Podstrona} name = "podstrona 1" />
+        <Route path="/apartment/details/:idApartment" component={ApartmentDetails} name = "Szczegoly apartamentu" />
     </React.Fragment>
 );

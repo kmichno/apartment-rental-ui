@@ -106,8 +106,9 @@
 }
 
 .apartment {
-  height: 220px;
+  min-height: 220px;
   background-color: #C9C6C4;
+  margin-bottom: 20px;
 }
 
 .apartment .img {
@@ -120,11 +121,12 @@
 
 .apartment .description-content {
   width: 540px;
-  height: 180px;
+  min-height: 180px;
   background-color: #C9C6C4;
-  float: right;
+  margin-left: 200px;
   margin-top: 20px;
   margin-right: 20px;
+  padding: 20px 0;
 }
 
 .apartment .description-content h3 {
@@ -138,9 +140,60 @@
   padding: 0;
 }
 
+.apartment .city {
+  font-size: 14px;
+}
+
+.apartment .price p {
+  text-align: right;
+  padding-right: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  color: darkgreen;
+}
+
+.apartment .description {
+  min-height: 70px;
+  margin-left: -180px;
+}
+
+.apartment p.additional-info {
+  font-size: 16px;
+  margin-left: -180px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.apartment .additional-description {
+  margin-top: 20px;
+  margin-left: -180px;
+
+}
+
+.apartment .button {
+  text-align: center;
+}
+
+.apartment .place-button {
+  height: 41px;
+  margin-bottom: 20px;
+}
+
+.button{
+  float: right;
+  width: 150px;
+  display: block;
+  text-decoration: none;
+  padding: 10px;
+  color: #FFFFCA;
+  background-color: #61dafb;
+  margin-top: 20px;
+}
+
 #footer {
   height: 40px;
   background-color: black;
+  margin-top: 40px;
 }
 
 .clear {
