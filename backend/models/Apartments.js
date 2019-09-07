@@ -13,5 +13,4 @@ module.exports = function (sequelize)  {
         "numberPeople": Sequelize.INTEGER,
         "priceDay": Sequelize.DECIMAL,
     })
-
 }

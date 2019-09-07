@@ -1,4 +1,18 @@
-# Lista endpointów - backend
+# List of endpoints - backend
 
-# GET Show all apartments with parameters 
-http://localhost:8080/apartments/show/all
+##########################
+#       Apartments 	     #
+##########################
+
+# Show all apartments with parameters (sort recently added)
+GET  http://localhost:8080/apartments/show/all
+
+# Show all apartments with limit results (parameters: @start is offset, @end limit results), sort recently added 
+GET  http://localhost:8080/apartments/show/all/@start/@end
+
+# Show information about single apartament (using @ID)
+GET http://localhost:8080/apartments/@ID
+
+# Add apartment (parameters: "name", "description", "city", "street", "code", "people", "price")
+POST http://localhost:8080/apartments/add
+
