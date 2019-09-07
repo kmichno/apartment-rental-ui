@@ -1,0 +1,4 @@
+# Lista endpointów - backend
+
+# GET Show all apartments with parameters 
+http://localhost:8080/apartments/show/all

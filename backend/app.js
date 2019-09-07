@@ -3,13 +3,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var express   = require('express');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var hotelsRouter = require('./routes/hotels');
-var roomsRouter = require('./routes/rooms');
+var apartmentsRouter = require('./routes/apartments');
 
-var app = express();
+var app = module.exports = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,7 +20,6 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/hotel', hotelsRouter);
-app.use('/room', roomsRouter);
+app.use('/apartments', apartmentsRouter);
 
 module.exports = app;
