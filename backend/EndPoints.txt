@@ -10,9 +10,19 @@ GET  http://localhost:8080/apartments/show/all
 # Show all apartments with limit results (parameters: @start is offset, @end limit results), sort recently added 
 GET  http://localhost:8080/apartments/show/all/@start/@end
 
-# Show information about single apartament (using @ID)
-GET http://localhost:8080/apartments/@ID
+# Show information about single apartament (using @id)
+GET http://localhost:8080/apartments/@id
 
 # Add apartment (parameters: "name", "description", "city", "street", "code", "people", "price")
 POST http://localhost:8080/apartments/add
 
+
+##########################
+#       Bookings 	     #
+##########################
+
+# Check the availability of the booking of the selected apartment (parameters: @id apartment, @date_start rental start date, @date_end rental end date)
+GET http://localhost:8080/bookings/check-status/apartment/@id/from/@date_start/to/@date_end
+
+# Add reservation (parameters: "idApartment", "idUser", "start", "end"), format date(start, end): YYYY-MM-DD
+POST http://localhost:8080/bookings/add
