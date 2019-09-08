@@ -1,7 +1,7 @@
 # List of endpoints - backend
 
 ##########################
-#       Apartments 	     #
+#       Apartments       #
 ##########################
 
 # Show all apartments with parameters (sort recently added)
@@ -16,9 +16,12 @@ GET http://localhost:8080/apartments/@id
 # Add apartment (parameters: "name", "description", "city", "street", "code", "people", "price")
 POST http://localhost:8080/apartments/add
 
+# Upload photo for apartment (parameters: "id" - apartament id, "image" - file)
+POST http://localhost:8080/apartments/upload-photo
+
 
 ##########################
-#       Bookings 	     #
+#        Bookings        #
 ##########################
 
 # Check the availability of the booking of the selected apartment (parameters: @id apartment, @date_start rental start date, @date_end rental end date)

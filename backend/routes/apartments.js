@@ -1,9 +1,22 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
 var Sequelize=require('sequelize');
 var connectionDatabase = require('../database.js');
 const sequelize = new Sequelize(connectionDatabase.databaseParameters);
 var ApartmentsModel = require('../models/Apartments.js');
+var GalleryModel = require('../models/Gallery.js');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function(req, file, cb) {
+        //console.log(file);
+        var uploadedFileName = Date.now() + '_' + file.originalname;
+        cb(null, uploadedFileName)
+    }
+})
 
 // Show all hotels
 router.get('/show/all', function(req, res) {
@@ -53,6 +66,28 @@ router.get('/show/:id', function(req, res) {
     }, function(error) {
         res.status(500).send(error);
     });
+});
+
+// Upload photo
+router.post('/upload-photo', function(req, res) {
+    const upload = multer({ storage }).single('image')
+    upload(req, res, function(err) {
+        if (err) {
+            res.status(400).json({ result: "error" });
+        }
+        //console.log(req.file.filename);
+
+        var insertGallery = {
+            "idApartment": req.body.id,
+            "fileGallery": req.file.filename
+        }
+        GalleryModel (sequelize).create(insertGallery).
+        then(function(Gallery) {
+            res.status(200).json({ result: "ok"});
+        }, function(error) {
+            res.status(500).send({ result: "error"});
+        });
+    })
 });
 
 module.exports = router;

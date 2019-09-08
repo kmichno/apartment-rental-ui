@@ -38,7 +38,6 @@ router.post('/add', function(req, res) {
     then(function(Bookings) {
         res.status(200).json({ result: "ok"});
     }, function(error) {
-        console.log("Log"+insertBookings);
         res.status(500).send({ result: "error"});
     });
 });
