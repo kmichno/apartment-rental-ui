@@ -48,7 +48,7 @@ DELETE http://localhost:8080/bookings/change/@id/delete
 GET http://localhost:8080/authorization/login
 
 # Logout user
-GET http://localhost:8080/authorization/login
+GET http://localhost:8080/authorization/logout
 
 # Check if the user is logged in (result "true" or "false")
 GET http://localhost:8080/authorization/check
