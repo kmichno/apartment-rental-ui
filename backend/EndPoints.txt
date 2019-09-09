@@ -38,3 +38,20 @@ PUT http://localhost:8080/bookings/change/@id/cancel
 
 # Booking delete (parameters @id - id apartment)
 DELETE http://localhost:8080/bookings/change/@id/delete
+
+
+##########################
+#        Users           #
+##########################
+
+# Login user
+GET http://localhost:8080/authorization/login
+
+# Logout user
+GET http://localhost:8080/authorization/login
+
+# Check if the user is logged in (result "true" or "false")
+GET http://localhost:8080/authorization/check
+
+# Show details about user if is logged
+GET http://localhost:8080/authorization/details

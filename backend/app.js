@@ -4,11 +4,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var express   = require('express');
+var passport = require('passport');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var apartmentsRouter = require('./routes/apartments');
 var bookingsRouter = require('./routes/bookings');
+var authorizationRouter = require('./routes/authorization.js');
 
 var app = module.exports = express();
 
@@ -19,9 +21,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
+/// Create session
+app.use(session({ secret: 'anything' }));
+app.use(passport.initialize());
+app.use(passport.session({ secret: 'secret', saveUninitialized: false, resave: false, cookie: { maxAge: 1000 } }));
+
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/apartments', apartmentsRouter);
 app.use('/bookings', bookingsRouter);
+app.use('/authorization', authorizationRouter);
 
 module.exports = app;

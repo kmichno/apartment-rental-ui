@@ -1,0 +1,6 @@
+module.exports = {
+    facebookParameters: {	clientID: 'XXXXXXXXXXXXXXXXXXx',   // ID Facebook
+    clientSecret: 'YYYYYYYYYYYYYYYYYYYYYYYYY', // Key Facebook
+    callbackURL: 'http://localhost:8080/authorization/facebook/callback'
+	}
+}

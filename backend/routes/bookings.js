@@ -42,12 +42,10 @@ router.post('/add', function(req, res) {
     });
 });
 
-
 // Booking Confirm
 router.put('/change/:id/confirm', function(req, res) {
      BookingsModel (sequelize).update({ status: "confirmed"},
-        {where: { idApartment: req.params.id  }
-        }).
+        {where: { idApartment: req.params.id  }}).
     then(function(Bookings) {
             res.status(200).json({result: "ok"});
     }, function(error) {
