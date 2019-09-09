@@ -29,7 +29,7 @@ class ApartmentDetails extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            this.setState({apartment: results})
+            this.setState({apartment: results.result})
         })
     }
 
@@ -53,11 +53,8 @@ class ApartmentDetails extends Component {
 
     postData = (event) => {
         event.preventDefault();
-        console.log("zrobione");
+        console.log(this.state.apartment.idApartment);
         this.bookApartment(this.state.apartment.idApartment, 1, 1, 1)
-        // this.setState({product_added: false});
-        // addProduct(this.state.product_name, this.state.product_description, this.state.product_category, this.state.product_price);
-        // this.setState({product_added: true});
     }
 
 

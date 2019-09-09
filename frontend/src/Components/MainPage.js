@@ -26,8 +26,7 @@ class MainPage extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            // console.log(results.result);
-            let apartments = results.map((apartment) => {
+            let apartments = results.result.map((apartment) => {
                 return (
                     <div className="apartment" key={apartment.idApartment}>
                         <div className="img">
