@@ -22,9 +22,9 @@ const storage = multer.diskStorage({
 router.get('/show/all', function(req, res) {
     ApartmentsModel (sequelize).findAll({ order: [['idApartment', 'DESC']] }).
     then(function(Apartments) {
-        res.status(200).json(Apartments);
+        res.status(200).json({result:Apartments});
     }, function(error) {
-        res.status(500).send(error);
+        res.status(500).send({result:"error"});
     });
 });
 
@@ -32,9 +32,9 @@ router.get('/show/all', function(req, res) {
 router.get('/show/all/:start/:end', function(req, res) {
     ApartmentsModel (sequelize).findAll({ offset: parseInt(req.params.start), limit: parseInt(req.params.end), order: [['idApartment', 'DESC']] }).
     then(function(Apartments) {
-        res.status(200).json(Apartments);
+        res.status(200).json({result:Apartments});
     }, function(error) {
-        res.status(500).send(error);
+        res.status(500).send({result:"error"});
     });
 });
 
@@ -62,9 +62,9 @@ router.post('/add', function(req, res) {
 router.get('/show/:id', function(req, res) {
     ApartmentsModel (sequelize).findAll({where: {idApartment: req.params.id},}).
     then(function(Apartments) {
-        res.status(200).json(Apartments[0]);
+        res.status(200).json({result:Apartments[0]});
     }, function(error) {
-        res.status(500).send(error);
+        res.status(500).send({result:"error"});
     });
 });
 

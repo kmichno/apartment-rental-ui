@@ -11,7 +11,7 @@ class MainPage extends Component {
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/hotel/show/all/0/10";
+        var url = "http://localhost:8080/apartments/show/all/0/10";
 
         fetch(url, {
             mode: 'cors',
@@ -26,7 +26,7 @@ class MainPage extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            console.log(results.result);
+            console.log("DEBUG Result"+results.result);
             let apartments = results.result.map((apartment) => {
                 return (
                     <div className="apartment" key={apartment.id}>
