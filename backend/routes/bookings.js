@@ -30,8 +30,8 @@ router.post('/add', function(req, res) {
     var insertBookings = {
         "idApartment": req.body.idApartment,
         "idUser": 1, // TODO change req.body.idUser,
-        "start": req.body.start,
-        "end": req.body.end,
+        "start": "2019-11-06", //req.body.start,
+        "end": "2019-11-07", //req.body.end,
         "status": 'unconfirmed'
     }
     BookingsModel (sequelize).create(insertBookings).
@@ -39,6 +39,7 @@ router.post('/add', function(req, res) {
         res.status(200).json({ result: "ok"});
     }, function(error) {
         res.status(500).send({ result: "error"});
+        console.log(error);
     });
 });
 

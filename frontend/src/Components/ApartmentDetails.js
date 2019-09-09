@@ -14,7 +14,7 @@ class ApartmentDetails extends Component {
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/hotel/show/"+this.state.idApartment;
+        var url = "http://localhost:8080/apartments/show/"+this.state.idApartment;
 
         fetch(url, {
             mode: 'cors',
@@ -29,10 +29,38 @@ class ApartmentDetails extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            console.log(results.result);
-            this.setState({apartment: results.result})
+            this.setState({apartment: results})
         })
     }
+
+    bookApartment(idApartment, idUser, start, end) {
+        const url = `http://localhost:8080/bookings/add`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idApartment: idApartment,
+                idUser: idUser,
+                start: start,
+                end: end
+            })
+        });
+    }
+
+
+    postData = (event) => {
+        event.preventDefault();
+        console.log("zrobione");
+        this.bookApartment(this.state.apartment.idApartment, 1, 1, 1)
+        // this.setState({product_added: false});
+        // addProduct(this.state.product_name, this.state.product_description, this.state.product_category, this.state.product_price);
+        // this.setState({product_added: true});
+    }
+
+
 
     render() {
         return (
@@ -58,12 +86,12 @@ class ApartmentDetails extends Component {
                                 <h1>
                                     Wybrany apartament:
                                 </h1>
-                                <div className="apartment" key={this.state.apartment.id}>
+                                <div className="apartment" key={this.state.apartment.idApartment}>
                                     <div className="img">
 
                                     </div>
                                     <div className="description-content">
-                                        <h3>{this.state.apartment.nameHotel}</h3>
+                                        <h3>{this.state.apartment.nameApartment}</h3>
                                         <p className="city">{this.state.apartment.city}</p>
                                         <div className="description">{this.state.apartment.description}</div>
                                         <p className="additional-info">Dodatkowe informacje</p>
@@ -73,7 +101,9 @@ class ApartmentDetails extends Component {
                                             <p>Cena: {this.state.apartment.priceDay} zł</p>
                                         </div>
                                         <div className="place-button">
-                                            <div className="button"><NavLink to="/">Rezerwuje</NavLink></div>
+                                            < form onSubmit={this.postData}>
+                                                <button className="button">Rezerwuje</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -26,26 +26,26 @@ class MainPage extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            console.log("DEBUG Result"+results.result);
-            let apartments = results.result.map((apartment) => {
+            // console.log(results.result);
+            let apartments = results.map((apartment) => {
                 return (
-                    <div className="apartment" key={apartment.id}>
+                    <div className="apartment" key={apartment.idApartment}>
                         <div className="img">
 
                         </div>
                         <div className="description-content">
-                            <h3>{apartment.nameHotel}</h3>
+                            <h3>{apartment.nameApartment}</h3>
                             <p className="city">{apartment.city}</p>
                             <div className="description">{apartment.description}</div>
                             <div className="price">
                                 <p>Cena: {apartment.priceDay} zł</p>
                             </div>
                             <div className="place-button">
-                                <div className="button"><NavLink to={`apartment/details/${apartment.idHotel}`}>Zobacz szczegóły</NavLink></div>
+                                <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
                             </div>
                         </div>
                     </div>
-            )
+                )
             });
             this.setState({apartments: apartments})
         })
