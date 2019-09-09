@@ -70,6 +70,9 @@ router.get('/show/:id', function(req, res) {
 
 // Upload photo
 router.post('/upload-photo', function(req, res) {
+
+    // TODO Repair this, bad query (INSERT INTO Galleries, NOT Gallery)
+
     const upload = multer({ storage }).single('image')
     upload(req, res, function(err) {
         if (err) {

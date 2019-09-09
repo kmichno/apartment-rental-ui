@@ -79,7 +79,7 @@ router.get('/check', function (req, res) {
 router.get('/details', function (req, res) {
     if (req.user){
         console.log ("Found user");
-        res.status(200).json({ result: { "name":req.user.name } });
+        res.status(200).json({ result: { "name":req.user.name, "idUser": "TODO" } });
         // TODO Return idUser
     }
     else {
