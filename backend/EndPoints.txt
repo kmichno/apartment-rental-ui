@@ -29,3 +29,12 @@ GET http://localhost:8080/bookings/check-status/apartment/@id/from/@date_start/t
 
 # Add reservation (parameters: "idApartment", "idUser", "start", "end"), format date(start, end): YYYY-MM-DD
 POST http://localhost:8080/bookings/add
+
+# Booking confirm (parameters @id - id apartment)
+PUT http://localhost:8080/bookings/change/@id/confirm
+
+# Booking cancel (parameters @id - id apartment)
+PUT http://localhost:8080/bookings/change/@id/cancel
+
+# Booking delete (parameters @id - id apartment)
+DELETE http://localhost:8080/bookings/change/@id/delete

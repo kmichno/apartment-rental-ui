@@ -42,4 +42,39 @@ router.post('/add', function(req, res) {
     });
 });
 
+
+// Booking Confirm
+router.put('/change/:id/confirm', function(req, res) {
+     BookingsModel (sequelize).update({ status: "confirmed"},
+        {where: { idApartment: req.params.id  }
+        }).
+    then(function(Bookings) {
+            res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send(error);
+    });
+});
+
+// Booking Cancel
+router.put('/change/:id/cancel', function(req, res) {
+    BookingsModel (sequelize).update({ status: "canceled"},
+        {where: { idApartment: req.params.id  }
+        }).
+    then(function(Bookings) {
+        res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send(error);
+    });
+});
+
+// Booking Delete
+router.delete('/change/:id/delete', function(req, res) {
+    BookingsModel (sequelize).destroy({where: { idApartment: req.params.id  }}).
+    then(function(Bookings) {
+        res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send(error);
+    });
+});
+
 module.exports = router;
