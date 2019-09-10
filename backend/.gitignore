@@ -91,3 +91,4 @@ typings/
 database.js
 facebook.js
 uploads/*
+/.idea/
