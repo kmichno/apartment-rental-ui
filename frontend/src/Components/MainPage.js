@@ -46,7 +46,7 @@ class MainPage extends Component {
                     </div>
                 )
             });
-            this.setState({apartments: apartments})
+            this.setState({bookings: apartments})
         })
     }
 
@@ -60,7 +60,7 @@ class MainPage extends Component {
                     <div id="nav-bar">
                         <ul>
                             <li><NavLink to="/">Główna</NavLink></li>
-                            <li><NavLink to="/podstrona">Moje rezerwacje</NavLink></li>
+                            <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
                             <li><a href="#"><span>Administracja</span></a></li>
                             <li><a href="#"><span>Profil</span></a></li>
                         </ul>
@@ -74,7 +74,7 @@ class MainPage extends Component {
                                 <h1>
                                     Wybierz apartament:
                                 </h1>
-                                {this.state.apartments}
+                                {this.state.bookings}
                             </div>
                         </div>
                         <div className="clear"></div>

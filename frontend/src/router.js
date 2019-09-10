@@ -7,6 +7,6 @@ export default (
     <React.Fragment>​
         <Route exact path="/" component={MainPage} myname={"Main page"}/>
         <Route path="/apartment/details/:idApartment" component={ApartmentDetails} name = "Szczegoly apartamentu" />
-        <Route path="/reservations" component={Bookings} name = "Moje rezerwacje" />
+        <Route path="/bookings" component={Bookings} name = "Moje rezerwacje" />
     </React.Fragment>
 );

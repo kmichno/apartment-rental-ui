@@ -69,7 +69,7 @@ class ApartmentDetails extends Component {
                     <div id="nav-bar">
                         <ul>
                             <li><NavLink to="/">Główna</NavLink></li>
-                            <li><NavLink to="/podstrona">Moje rezerwacje</NavLink></li>
+                            <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
                             <li><a href="#"><span>Administracja</span></a></li>
                             <li><a href="#"><span>Profil</span></a></li>
                         </ul>

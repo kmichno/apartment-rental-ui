@@ -6,12 +6,12 @@ class Bookings extends Component {
     constructor() {
         super();
         this.state = {
-            apartments: [],
+            bookings: [],
         };
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/apartments/show/all/0/10";
+        var url = "http://localhost:8080/bookings/show/all";
 
         fetch(url, {
             mode: 'cors',
@@ -26,27 +26,29 @@ class Bookings extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            let apartments = results.result.map((apartment) => {
+            let bookings = results.result.map((booking) => {
                 return (
-                    <div className="apartment" key={apartment.idApartment}>
+                    <div className="apartment" key={booking.idBooking}>
                         <div className="img">
 
                         </div>
                         <div className="description-content">
-                            <h3>{apartment.nameApartment}</h3>
-                            <p className="city">{apartment.city}</p>
-                            <div className="description">{apartment.description}</div>
+                            <h3>{booking.apartment.nameApartment}</h3>
+                            <p className="city">{booking.apartment.city}</p>
                             <div className="price">
-                                <p>Cena: {apartment.priceDay} zł</p>
+                                <p>Status: {booking.status}</p>
+                                <p>Od {booking.start} do {booking.end}</p>
+                                <p>Max. ilość ludzi: {booking.apartment.numberPeople}</p>
+                                <p>Cena: {booking.apartment.priceDay} zł</p>
                             </div>
                             <div className="place-button">
-                                <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
+                                <div className="button"><NavLink to={`apartment/details/${booking.apartment.idApartment}`}>Anuluj rezerwacje</NavLink></div>
                             </div>
                         </div>
                     </div>
                 )
             });
-            this.setState({apartments: apartments})
+            this.setState({bookings: bookings})
         })
     }
 
@@ -60,7 +62,7 @@ class Bookings extends Component {
                     <div id="nav-bar">
                         <ul>
                             <li><NavLink to="/">Główna</NavLink></li>
-                            <li><NavLink to="/podstrona">Moje rezerwacje</NavLink></li>
+                            <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
                             <li><a href="#"><span>Administracja</span></a></li>
                             <li><a href="#"><span>Profil</span></a></li>
                         </ul>
@@ -72,9 +74,9 @@ class Bookings extends Component {
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <h1>
-                                    Wybierz apartament:
+                                    Rezerwacje:
                                 </h1>
-                                {this.state.apartments}
+                                {this.state.bookings}
                             </div>
                         </div>
                         <div className="clear"></div>
