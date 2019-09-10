@@ -5,6 +5,9 @@ var connectionDatabase = require('../database.js');
 const sequelize = new Sequelize(connectionDatabase.databaseParameters);
 var BookingsModel = require('../models/Bookings.js');
 
+const Bookings = require('../sequalize').Bookings;
+const Apartments = require('../sequalize').Apartments;
+
 // Check the availability of the booking of the selected apartment
 router.get('/check-status/:id/from/:date_start/to/:date_end', function(req, res) {
     BookingsModel (sequelize).count({where: {
@@ -27,6 +30,7 @@ router.get('/check-status/:id/from/:date_start/to/:date_end', function(req, res)
 
 // Add reservation
 router.post('/add', function(req, res) {
+    console.log(req.body.idApartment);
     var insertBookings = {
         "idApartment": req.body.idApartment,
         "idUser": 1, // TODO change req.body.idUser,
@@ -40,6 +44,21 @@ router.post('/add', function(req, res) {
     }, function(error) {
         res.status(500).send({ result: "error"});
         console.log(error);
+    });
+});
+
+// Show all bookings
+router.get('/show/all', function(req, res) {
+    Bookings.findAll({
+        include: [{
+            model: Apartments,
+            as: 'apartment'
+        }] }).
+    then(function(Bookings) {
+        res.status(200).json({result:Bookings});
+    }, function(error) {
+        console.log(error);
+        res.status(500).send({result:"error"});
     });
 });
 
