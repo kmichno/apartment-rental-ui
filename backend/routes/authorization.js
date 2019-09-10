@@ -12,14 +12,18 @@ passport.use(new FacebookStrategy(connectionFacebook.facebookParameters,
 
     function (accessToken, refreshToken, profile, cb) {
         //console.log('....', accessToken, refreshToken, profile, cb);
-        UsersModel (sequelize).count({where: {
+        UsersModel (sequelize).count({
+            where: {
                 idProvider: { [Sequelize.Op.eq]: profile.id  }
             }}).
         then(function(Users) {
             if (Users==1) {
                 console.log("User found in DB");
-                UsersModel (sequelize).update({ dateLastLogin: new Date()},
-                    {where: { idProvider: profile.id  }}).
+                UsersModel (sequelize).update({
+                        dateLastLogin: new Date()},
+                        {
+                        where: {
+                            idProvider: profile.id  }}).
                 then(function(Users) {
                     console.log ("Update last login date");
                 }, function(error) {
@@ -78,14 +82,57 @@ router.get('/check', function (req, res) {
 // Show details about logged user
 router.get('/details', function (req, res) {
     if (req.user){
-        console.log ("Found user");
-        res.status(200).json({ result: { "name":req.user.name, "idUser": "TODO" } });
-        // TODO Return idUser
+        //console.log ("Found user with provider id"+req.user.user);
+        UsersModel(sequelize).findAll({
+            where: {
+                idProvider: req.user.user
+            },}).
+        then(function(UsersCheck) {
+            res.status(200).json({
+                result: {
+                    "name":req.user.name,
+                    "idUser": UsersCheck[0].idUser,
+                    "isAdmin": UsersCheck[0].isAdmin
+                } });
+        }, function(error) { });
     }
     else {
         res.status(200).json({ result: null});
     }
 
+});
+
+// Set permission for admin
+router.put('/admin-permission/set/user/:id', function (req, res) {
+    UsersModel (sequelize).update({
+            isAdmin: 1
+        },
+
+        {
+            where: {
+            idUser: req.params.id
+        }}).
+        then(function(Users) {
+                res.status(200).json({result: "ok"});
+        }, function(error) {
+            res.status(500).send({result: "ok"});
+        });
+});
+
+// Unset permission for admin
+router.put('/admin-permission/unset/user/:id', function (req, res) {
+    UsersModel (sequelize).update({
+            isAdmin: 0
+        },
+        {
+            where: {
+                idUser: req.params.id
+            }}).
+    then(function(Users) {
+        res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send({result: "ok"});
+    });
 });
 
 router.get('/facebook/callback',

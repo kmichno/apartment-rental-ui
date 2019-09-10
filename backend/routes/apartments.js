@@ -20,7 +20,9 @@ const storage = multer.diskStorage({
 
 // Show all hotels
 router.get('/show/all', function(req, res) {
-    ApartmentsModel (sequelize).findAll({ order: [['idApartment', 'DESC']] }).
+    ApartmentsModel (sequelize).findAll({
+        order: [['idApartment', 'DESC']]
+    }).
     then(function(Apartments) {
         res.status(200).json({result:Apartments});
     }, function(error) {
@@ -30,7 +32,11 @@ router.get('/show/all', function(req, res) {
 
 // Show all hotels - limit results
 router.get('/show/all/:start/:end', function(req, res) {
-    ApartmentsModel (sequelize).findAll({ offset: parseInt(req.params.start), limit: parseInt(req.params.end), order: [['idApartment', 'DESC']] }).
+    ApartmentsModel (sequelize).findAll({
+        offset: parseInt(req.params.start),
+        limit: parseInt(req.params.end),
+        order: [['idApartment', 'DESC']]
+    }).
     then(function(Apartments) {
         res.status(200).json({result:Apartments});
     }, function(error) {
@@ -60,7 +66,9 @@ router.post('/add', function(req, res) {
 
 // Show hotel by ID
 router.get('/show/:id', function(req, res) {
-    ApartmentsModel (sequelize).findAll({where: {idApartment: req.params.id},}).
+    ApartmentsModel (sequelize).findAll({
+        where: {idApartment: req.params.id
+        },}).
     then(function(Apartments) {
         res.status(200).json({result:Apartments[0]});
     }, function(error) {
@@ -70,9 +78,6 @@ router.get('/show/:id', function(req, res) {
 
 // Upload photo
 router.post('/upload-photo', function(req, res) {
-
-    // TODO Repair this, bad query (INSERT INTO Galleries, NOT Gallery)
-
     const upload = multer({ storage }).single('image')
     upload(req, res, function(err) {
         if (err) {
@@ -82,7 +87,8 @@ router.post('/upload-photo', function(req, res) {
 
         var insertGallery = {
             "idApartment": req.body.id,
-            "fileGallery": req.file.filename
+            "fileGallery": req.file.filename,
+            "default": 0,
         }
         GalleryModel (sequelize).create(insertGallery).
         then(function(Gallery) {
@@ -91,6 +97,33 @@ router.post('/upload-photo', function(req, res) {
             res.status(500).send({ result: "error"});
         });
     })
+});
+
+// Set default image for apartment
+router.put('/set/image/:id_gallery/id/:id_apartment', function(req, res) {
+    GalleryModel (sequelize).update({
+            default: 0
+        }, // unset all images for id_apartment
+        {
+            where: {
+                idApartment: req.params.id_apartment
+            }}).
+        then(function(Gallery) {
+                GalleryModel (sequelize).update({
+                        default: 1
+                    }, //set new default image
+                    {
+                        where: {
+                            idGallery: req.params.id_gallery
+                        }}).
+                then(function(Gallery2) {
+                    res.status(200).json({result: "ok"});
+                }, function(error) {
+                    res.status(500).send({result: "error"});
+                });
+        }, function(error) {
+            res.status(500).send({result: "ok"});
+        });
 });
 
 module.exports = router;

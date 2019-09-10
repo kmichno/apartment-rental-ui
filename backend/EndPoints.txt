@@ -19,6 +19,9 @@ POST http://localhost:8080/apartments/add
 # Upload photo for apartment (parameters: "id" - apartament id, "image" - file)
 POST http://localhost:8080/apartments/upload-photo
 
+# Set default image for apartment (paramaters: "ID_IMAGE" - id default image, "ID_APARTMENT" - id apartment)
+PUT http://localhost:8080/apartments/set/image/@ID_IMAGE/id/@ID_APARTMENT
+
 
 ##########################
 #        Bookings        #
@@ -39,6 +42,10 @@ PUT http://localhost:8080/bookings/change/@id/cancel
 # Booking delete (parameters @id - id apartment)
 DELETE http://localhost:8080/bookings/change/@id/delete
 
+# Show bookings for USER (parameter @id)
+# TODO
+#GET http://localhost:8080/bookings/show/user/@id
+#
 
 ##########################
 #        Users           #
@@ -53,5 +60,11 @@ GET http://localhost:8080/authorization/logout
 # Check if the user is logged in (result "true" or "false")
 GET http://localhost:8080/authorization/check
 
-# Show details about user if is logged
+# Show details about user if is logged (name, id)
 GET http://localhost:8080/authorization/details
+
+# Set admin permission (parameters @id is user id)
+PUT http://localhost:8080/authorization/admin-permission/set/user/@id
+
+# Unset admin permission (parameters @id is user id)
+PUT http://localhost:8080/authorization/admin-permission/unset/user/@id
