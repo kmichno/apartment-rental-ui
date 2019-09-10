@@ -30,6 +30,9 @@ PUT http://localhost:8080/apartments/set/image/@ID_IMAGE/id/@ID_APARTMENT
 # Check the availability of the booking of the selected apartment (parameters: @id apartment, @date_start rental start date, @date_end rental end date)
 GET http://localhost:8080/bookings/check-status/apartment/@id/from/@date_start/to/@date_end
 
+# Check the availability of the booking of the selected apartment (parameters: @id apartment, @date_start rental start date, @date_end rental end date)
+GET http://localhost:8080/bookings/show/all
+
 # Add reservation (parameters: "idApartment", "idUser", "start", "end"), format date(start, end): YYYY-MM-DD
 POST http://localhost:8080/bookings/add
 
