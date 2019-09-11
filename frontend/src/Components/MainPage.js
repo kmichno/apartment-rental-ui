@@ -27,10 +27,10 @@ class MainPage extends Component {
                 return results.json();
             }).then(results => {
             let apartments = results.result.map((apartment) => {
-                return (
+                 return (
                     <div className="apartment" key={apartment.idApartment}>
                         <div className="img">
-
+                            
                         </div>
                         <div className="description-content">
                             <h3>{apartment.nameApartment}</h3>

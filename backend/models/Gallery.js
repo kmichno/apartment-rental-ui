@@ -1,9 +1,7 @@
-var Sequelize=require('sequelize');
-var connectionDatabase = require('../database.js');
-const sequelize = new Sequelize(connectionDatabase.databaseParameters);
+const Sequelize = require('sequelize');
 
-module.exports = function (sequelize)  {
-    return sequelize.define('Gallery',{
+module.exports = (sequelize, type)=> {
+    const gallery= sequelize.define('Gallery',{
         "idGallery": {
             type: Sequelize.DataTypes.INTEGER,
             autoIncrement: true,
@@ -14,5 +12,7 @@ module.exports = function (sequelize)  {
         "fileGallery": Sequelize.STRING
     }, {
         freezeTableName: true
-    })
+    });
+
+    return gallery;
 }
