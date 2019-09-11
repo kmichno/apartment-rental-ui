@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 
-class MainPage extends Component {
+class ApartmentAdministration extends Component {
 
     constructor() {
         super();
@@ -11,7 +11,7 @@ class MainPage extends Component {
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/apartments/show/all/0/10";
+        var url = "http://localhost:8080/apartments/show/all";
 
         fetch(url, {
             mode: 'cors',
@@ -30,7 +30,7 @@ class MainPage extends Component {
                  return (
                     <div className="apartment" key={apartment.idApartment}>
                         <div className="img">
-                            {apartment.filePath}
+                            
                         </div>
                         <div className="description-content">
                             <h3>{apartment.nameApartment}</h3>
@@ -41,12 +41,14 @@ class MainPage extends Component {
                             </div>
                             <div className="place-button">
                                 <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
+                                <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Edytuj dane</NavLink></div>
+                                <div className="button" onClick={()=>{this.deleteApartment(apartment.idApartment)}}>Usuń apartament</div>
                             </div>
                         </div>
                     </div>
                 )
             });
-            this.setState({bookings: apartments})
+            this.setState({apartments: apartments})
         })
     }
 
@@ -71,10 +73,11 @@ class MainPage extends Component {
                         </div>
                         <div id="right-side">
                             <div id="right-side-inner">
+                                <div><NavLink to={`apartment/add`}>Dodaj nowy apartament</NavLink></div>
                                 <h1>
-                                    Wybierz apartament:
+                                    Edytuj apartament:
                                 </h1>
-                                {this.state.bookings}
+                                {this.state.apartments}
                             </div>
                         </div>
                         <div className="clear"></div>
@@ -86,4 +89,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default ApartmentAdministration;

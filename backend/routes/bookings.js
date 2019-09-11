@@ -105,7 +105,7 @@ router.put('/change/:id/cancel', function(req, res) {
 router.delete('/change/:id/delete', function(req, res) {
     BookingsModel (sequelize).destroy({
         where: {
-            idApartment: req.params.id
+            idBooking: req.params.id
         }}).
     then(function(Bookings) {
         res.status(200).json({result: "ok"});

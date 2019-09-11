@@ -7,7 +7,10 @@ class Bookings extends Component {
         super();
         this.state = {
             bookings: [],
+            bookingsList: [],
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -26,33 +29,56 @@ class Bookings extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            let bookings = results.result.map((booking) => {
-                return (
-                    <div className="apartment" key={booking.idBooking}>
-                        <div className="img">
-
-                        </div>
-                        <div className="description-content">
-                            <h3>{booking.apartment.nameApartment}</h3>
-                            <p className="city">{booking.apartment.city}</p>
-                            <div className="price">
-                                <p>Status: {booking.status}</p>
-                                <p>Od {booking.start} do {booking.end}</p>
-                                <p>Max. ilość ludzi: {booking.apartment.numberPeople}</p>
-                                <p>Cena: {booking.apartment.priceDay} zł</p>
-                            </div>
-                            <div className="place-button">
-                                <div className="button"><NavLink to={`apartment/details/${booking.apartment.idApartment}`}>Anuluj rezerwacje</NavLink></div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            });
-            this.setState({bookings: bookings})
+                this.setState({bookingsList: results.result})
         })
     }
 
+    cancelBooking(idBooking) {
+        const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+
+    handleSubmit (idBooking) {
+        return event => {
+            event.preventDefault();
+            this.cancelBooking(idBooking);
+            let filteredArray = this.state.bookingsList.filter(item => idBooking != item.idBooking)
+            this.setState({bookingsList: filteredArray});
+
+        }
+    }
+
     render() {
+        let bookings = this.state.bookingsList.map((booking) => {
+            return (
+                <div className="apartment" key={booking.idBooking}>
+                    <div className="img">
+
+                    </div>
+                    <div className="description-content">
+                        <h3>{booking.apartment.nameApartment}</h3>
+                        <p className="city">{booking.apartment.city}</p>
+                        <div className="price">
+                            <p>Status: {booking.status}</p>
+                            <p>Od {booking.start} do {booking.end}</p>
+                            <p>Max. ilość ludzi: {booking.apartment.numberPeople}</p>
+                            <p>Cena: {booking.apartment.priceDay} zł</p>
+                        </div>
+                        <div className="place-button">
+                            <form onSubmit={this.handleSubmit(booking.idBooking)}>
+                                <button className="button">Anuluj rezerwacje</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )
+        });
         return (
             <React.Fragment>
                 <div id="container">
@@ -63,7 +89,7 @@ class Bookings extends Component {
                         <ul>
                             <li><NavLink to="/">Główna</NavLink></li>
                             <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                            <li><a href="#"><span>Administracja</span></a></li>
+                            <li><a href="/admin/apartments"><span>Administracja</span></a></li>
                             <li><a href="#"><span>Profil</span></a></li>
                         </ul>
                     </div>
@@ -76,7 +102,7 @@ class Bookings extends Component {
                                 <h1>
                                     Rezerwacje:
                                 </h1>
-                                {this.state.bookings}
+                                {bookings}
                             </div>
                         </div>
                         <div className="clear"></div>

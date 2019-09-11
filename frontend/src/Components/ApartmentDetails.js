@@ -70,7 +70,7 @@ class ApartmentDetails extends Component {
                         <ul>
                             <li><NavLink to="/">Główna</NavLink></li>
                             <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                            <li><a href="#"><span>Administracja</span></a></li>
+                            <li><a href="/admin/apartments"><span>Administracja</span></a></li>
                             <li><a href="#"><span>Profil</span></a></li>
                         </ul>
                     </div>
@@ -98,7 +98,7 @@ class ApartmentDetails extends Component {
                                             <p>Cena: {this.state.apartment.priceDay} zł</p>
                                         </div>
                                         <div className="place-button">
-                                            < form onSubmit={this.postData}>
+                                            <form onSubmit={this.postData}>
                                                 <button className="button">Rezerwuje</button>
                                             </form>
                                         </div>

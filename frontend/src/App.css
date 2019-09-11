@@ -172,11 +172,26 @@
 
 .apartment .button {
   text-align: center;
+  margin-left: 2px;
 }
 
 .apartment .place-button {
   height: 41px;
   margin-bottom: 20px;
+}
+
+.addapartment label{
+  display: block;
+}
+
+.addapartment input{
+  height: 25px;
+  width: 260px;
+}
+
+.addapartment textarea {
+  height: 200px;
+  width: 600px;
 }
 
 .button{
