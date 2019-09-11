@@ -26,12 +26,15 @@ router.get('/show/all', function(req, res) {
     Apartments.findAll({
         include: [{
             model: Gallery,
-            attributes: ['fileGallery'],
             where: {
                 default:1
                 },
             required: false
         }],
+        attributes: {
+            include:
+                [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
+        },
         order: [['idApartment', 'DESC']]
     }).
     then(function(Gallery) {
@@ -47,12 +50,17 @@ router.get('/show/all/:start/:end', function(req, res) {
     Apartments.findAll({
         include: [{
             model: Gallery,
-            attributes: ['fileGallery'],
             where: {
                 default:1
             },
             required: false
         }],
+        attributes: {
+            include:
+                [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
+            },
+         offset: parseInt(req.params.start),
+        limit: parseInt(req.params.end),
         order: [['idApartment', 'DESC']]
     }).
     then(function(Gallery) {

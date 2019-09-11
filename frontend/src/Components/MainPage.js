@@ -30,7 +30,7 @@ class MainPage extends Component {
                  return (
                     <div className="apartment" key={apartment.idApartment}>
                         <div className="img">
-                            
+                            {apartment.filePath}
                         </div>
                         <div className="description-content">
                             <h3>{apartment.nameApartment}</h3>
