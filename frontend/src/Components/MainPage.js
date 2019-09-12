@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
+import Menu from './Menu';
 
 class MainPage extends Component {
 
@@ -57,14 +58,7 @@ class MainPage extends Component {
                     <div id="logo"><h1>
                         Accomodation rental
                     </h1></div>
-                    <div id="nav-bar">
-                        <ul>
-                            <li><NavLink to="/">Główna</NavLink></li>
-                            <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                            <li><a href="/admin/apartments"><span>Administracja</span></a></li>
-                            <li><a href="#"><span>Profil</span></a></li>
-                        </ul>
-                    </div>
+                    <Menu />
                     <div id="content">
                         <div id="left-side">
                             <div id="search-box"></div>
