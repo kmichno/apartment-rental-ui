@@ -153,4 +153,26 @@ router.put('/set/image/:id_gallery/id/:id_apartment', function(req, res) {
         });
 });
 
+// Edit apartment
+router.put('/edit/:id', function(req, res) {
+    Apartments.update({
+            nameApartment: req.body.nameApartment,
+            description: req.body.description,
+            city: req.body.city,
+            street: req.body.street,
+            code: req.body.code,
+            numberPeople: req.body.numberPeople,
+            priceDay: req.body.priceDay
+        },
+        {
+            where: {
+                idApartment: req.params.id  }
+        }).
+    then(function(Apartments) {
+        res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send({result: "ok"});
+    });
+});
+
 module.exports = router;

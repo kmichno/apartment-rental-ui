@@ -44,7 +44,7 @@ class ApartmentAdministration extends Component {
                             </div>
                             <div className="place-button">
                                 <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
-                                <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Edytuj dane</NavLink></div>
+                                <div className="button"><NavLink to={`/admin/apartment/edit/17`}>Edytuj dane</NavLink></div>
                                 <div className="button" onClick={()=>{this.deleteApartment(apartment.idApartment)}}>Usuń apartament</div>
                             </div>
                         </div>
@@ -53,6 +53,27 @@ class ApartmentAdministration extends Component {
             });
             this.setState({apartments: apartments})
         })
+    }
+
+    cancelBooking(idBooking) {
+        const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+
+    handleSubmit (idBooking) {
+        return event => {
+            event.preventDefault();
+            this.cancelBooking(idBooking);
+            let filteredArray = this.state.bookingsList.filter(item => idBooking != item.idBooking)
+            this.setState({bookingsList: filteredArray});
+
+        }
     }
 
     render() {

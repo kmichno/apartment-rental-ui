@@ -4,12 +4,14 @@ import Header from "./Header";
 import LeftSide from "./LeftSide";
 import Popup from './Popup';
 
-class AddApartment extends Component {
+class EditApartment extends Component {
 
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
+        console.log(props)
         this.state = {
             showPopup: false,
+            idApartment: this.props.match.params.idApartment,
             nameApartment: "",
             city: "",
             street: "",
@@ -21,16 +23,39 @@ class AddApartment extends Component {
     }
 
     componentDidMount() {
+        var url = "http://localhost:8080/apartments/show/"+this.state.idApartment;
 
+        fetch(url, {
+            mode: 'cors',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'http://localhost:3000',
+            },
+            method: 'GET',
+        })
+            .then(results => {
+                console.log(results);
+                return results.json();
+            }).then(results => {
+            this.setState({
+                nameApartment: results.result.nameApartment,
+                city: results.result.city,
+                street: results.result.street,
+                code: results.result.code,
+                priceDay: results.result.priceDay,
+                numberPeople: results.result.numberPeople,
+                description: results.result.description,
+            })
+        })
     }
-
 
 
     addApartment(data) {
         console.log(data);
-        const url = `http://localhost:8080/apartments/add`;
+        const url = "http://localhost:8080/apartments/edit/"+this.state.idApartment;
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -105,10 +130,10 @@ class AddApartment extends Component {
                                             <label htmlFor="msg">Opis apartamentu:</label>
                                             <textarea id="msg" required  name="description" value={this.state.description} onChange={(e) => this.handleChange(e)} ></textarea>
                                         </div>
-                                        <button className="button">Dodaj apartament</button>
+                                        <button className="button">Edytuj apartament</button>
                                         {this.state.showPopup ?
                                             <Popup
-                                                text='Nowy apartament został dodany'
+                                                text='Apartament został zedytowany'
                                                 closePopup={this.togglePopup.bind(this)}
                                             />
                                             : null
@@ -126,4 +151,4 @@ class AddApartment extends Component {
     }
 }
 
-export default AddApartment;
+export default EditApartment;
