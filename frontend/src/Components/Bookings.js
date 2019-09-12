@@ -9,7 +9,7 @@ class Bookings extends Component {
         super();
         this.state = {
             bookings: [],
-            bookingsList: [],
+            apartmentsList: [],
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +31,7 @@ class Bookings extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-                this.setState({bookingsList: results.result})
+                this.setState({apartmentsList: results.result})
         })
     }
 
@@ -50,14 +50,14 @@ class Bookings extends Component {
         return event => {
             event.preventDefault();
             this.cancelBooking(idBooking);
-            let filteredArray = this.state.bookingsList.filter(item => idBooking != item.idBooking)
-            this.setState({bookingsList: filteredArray});
+            let filteredArray = this.state.apartmentsList.filter(item => idBooking != item.idBooking)
+            this.setState({apartmentsList: filteredArray});
 
         }
     }
 
     render() {
-        let bookings = this.state.bookingsList.map((booking) => {
+        let bookings = this.state.apartmentsList.map((booking) => {
             return (
                 <div className="apartment" key={booking.idBooking}>
                     <div className="img">

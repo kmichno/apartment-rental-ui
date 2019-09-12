@@ -9,7 +9,7 @@ class ApartmentAdministration extends Component {
     constructor() {
         super();
         this.state = {
-            apartments: [],
+            apartmentsList: [],
         };
     }
 
@@ -29,33 +29,11 @@ class ApartmentAdministration extends Component {
                 console.log(results);
                 return results.json();
             }).then(results => {
-            let apartments = results.result.map((apartment) => {
-                 return (
-                    <div className="apartment" key={apartment.idApartment}>
-                        <div className="img">
-                            
-                        </div>
-                        <div className="description-content">
-                            <h3>{apartment.nameApartment}</h3>
-                            <p className="city">{apartment.city}</p>
-                            <div className="description">{apartment.description}</div>
-                            <div className="price">
-                                <p>Cena: {apartment.priceDay} zł</p>
-                            </div>
-                            <div className="place-button">
-                                <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
-                                <div className="button"><NavLink to={`/admin/apartment/edit/17`}>Edytuj dane</NavLink></div>
-                                <div className="button" onClick={()=>{this.deleteApartment(apartment.idApartment)}}>Usuń apartament</div>
-                            </div>
-                        </div>
-                    </div>
-                )
-            });
-            this.setState({apartments: apartments})
+            this.setState({apartmentsList: results.result})
         })
     }
 
-    cancelBooking(idBooking) {
+    deleteApartment(idBooking) {
         const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
         fetch(url, {
             method: 'DELETE',
@@ -66,17 +44,39 @@ class ApartmentAdministration extends Component {
         });
     }
 
-    handleSubmit (idBooking) {
+    handleSubmit (idApartment) {
         return event => {
             event.preventDefault();
-            this.cancelBooking(idBooking);
-            let filteredArray = this.state.bookingsList.filter(item => idBooking != item.idBooking)
-            this.setState({bookingsList: filteredArray});
+            this.deleteApartment(idApartment);
+            let filteredArray = this.state.apartmentsList.filter(item => idApartment != item.idApartment)
+            this.setState({apartmentsList: filteredArray});
 
         }
     }
 
     render() {
+        let apartments = this.state.apartmentsList.map((apartment) => {
+            return (
+                <div className="apartment" key={apartment.idApartment}>
+                    <div className="img">
+
+                    </div>
+                    <div className="description-content">
+                        <h3>{apartment.nameApartment}</h3>
+                        <p className="city">{apartment.city}</p>
+                        <div className="description">{apartment.description}</div>
+                        <div className="price">
+                            <p>Cena: {apartment.priceDay} zł</p>
+                        </div>
+                        <div className="place-button">
+                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
+                            <div className="button"><NavLink to={`/admin/apartment/edit/17`}>Edytuj dane</NavLink></div>
+                            <div className="button" onClick={()=>{this.deleteApartment(apartment.idApartment)}}>Usuń apartament</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        });
         return (
             <React.Fragment>
                 <div id="container">
@@ -89,7 +89,7 @@ class ApartmentAdministration extends Component {
                                 <h1>
                                     Edytuj apartament:
                                 </h1>
-                                {this.state.apartments}
+                                {apartments}
                             </div>
                         </div>
                         <div className="clear"></div>

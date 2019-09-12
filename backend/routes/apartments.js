@@ -175,4 +175,17 @@ router.put('/edit/:id', function(req, res) {
     });
 });
 
+// Delete apartment
+router.delete('/delete/:id', function(req, res) {
+    Apartments.destroy({
+        where: {
+            idApartment: req.params.id
+        }}).
+    then(function(Apartments) {
+        res.status(200).json({result: "ok"});
+    }, function(error) {
+        res.status(500).send({result: "ok"});
+    });
+});
+
 module.exports = router;
