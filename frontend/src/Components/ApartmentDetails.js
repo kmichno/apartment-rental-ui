@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
-import Menu from "./Menu";
+import Footer from "./Footer";
+import Header from "./Header";
+import LeftSide from "./LeftSide";
 
 class ApartmentDetails extends Component {
 
@@ -64,14 +65,9 @@ class ApartmentDetails extends Component {
         return (
             <React.Fragment>
                 <div id="container">
-                    <div id="logo"><h1>
-                        Accomodation rental
-                    </h1></div>
-                    <Menu />
+                    <Header />
                     <div id="content">
-                        <div id="left-side">
-                            <div id="search-box"></div>
-                        </div>
+                        <LeftSide />
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <h1>
@@ -102,7 +98,7 @@ class ApartmentDetails extends Component {
                         </div>
                         <div className="clear"></div>
                     </div>
-                    <div id="footer"></div>
+                    <Footer />
                 </div>
             </React.Fragment>
         );
