@@ -2,18 +2,65 @@ import React, {Component} from 'react';
 import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
+import Popup from './Popup';
 
 class ApartmentAdministration extends Component {
 
     constructor() {
         super();
         this.state = {
-            apartments: [],
+            showPopup: false,
+            nameApartment: "",
+            city: "",
+            street: "",
+            code: "",
+            priceDay: "",
+            numberPeople: "",
+            description: "",
         };
     }
 
     componentDidMount() {
 
+    }
+
+
+
+    addApartment(data) {
+        console.log(data);
+        const url = `http://localhost:8080/apartments/add`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nameApartment: this.state.nameApartment,
+                city: this.state.city,
+                street: this.state.street,
+                code: this.state.code,
+                priceDay: this.state.priceDay,
+                numberPeople: this.state.numberPeople,
+                description: this.state.description,
+            })
+        });
+    }
+    handleSubmit =
+         event => {
+            event.preventDefault();
+            this.togglePopup();
+            this.addApartment();
+
+    }
+
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
+    handleChange(e){
+        this.setState({[e.target.name]: e.target.value})
     }
 
     render() {
@@ -29,35 +76,43 @@ class ApartmentAdministration extends Component {
                                     Dodaj apartament:
                                 </h1>
                                 <div>
-                                    <form className="addapartment" action="/my-handling-form-page" method="post">
+                                    <form onSubmit={this.handleSubmit} className="addapartment" method="none">
                                         <div>
                                             <label htmlFor="name">Nazwa apartamentu:</label>
-                                            <input type="text" id="name" name="nameApartment"/>
+                                            <input type="text" required id="name" name="nameApartment" value={this.state.nameApartment} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="mail">Miasto:</label>
-                                            <input type="text" id="city" name="city"/>
+                                            <input type="text"  required id="city" name="city" value={this.state.city} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="mail">Ulica:</label>
-                                            <input type="text" id="streat" name="streat"/>
+                                            <input type="text" required id="street" name="street" value={this.state.street} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="mail">Kod pocztowy:</label>
-                                            <input type="text" id="code" name="code"/>
+                                            <input type="text" required id="code" name="code" value={this.state.code} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="mail">Cena za noc:</label>
-                                            <input type="number" id="code" name="code"/>
+                                            <input type="number" required  id="code" name="priceDay" value={this.state.priceDay} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="mail">Maksymalna ilość ludzi:</label>
-                                            <input type="number" id="code" name="code"/>
+                                            <input type="number" required  id="code" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
                                             <label htmlFor="msg">Opis apartamentu:</label>
-                                            <textarea id="msg" name="description"></textarea>
+                                            <textarea id="msg" required  name="description" value={this.state.description} onChange={(e) => this.handleChange(e)} ></textarea>
                                         </div>
+                                        <button className="button">Dodaj apartament</button>
+                                        {this.state.showPopup ?
+                                            <Popup
+                                                text='Nowy apartament został dodany'
+                                                closePopup={this.togglePopup.bind(this)}
+                                            />
+                                            : null
+                                        }
                                     </form>
                                 </div>
                             </div>

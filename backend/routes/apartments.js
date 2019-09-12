@@ -75,13 +75,13 @@ router.get('/show/all/:start/:end', function(req, res) {
 router.post('/add', function(req, res) {
     //console.log("Get parametets:"+req.body);
     var insertApartaments = {
-        "nameApartment": req.body.name,
+        "nameApartment": req.body.nameApartment,
         "description": req.body.description,
         "city": req.body.city,
         "street": req.body.street,
         "code": req.body.code,
-        "numberPeople": req.body.people,
-        "priceDay": req.body.price
+        "numberPeople": req.body.numberPeople,
+        "priceDay": req.body.priceDay
     }
     ApartmentsModel (sequelize).create(insertApartaments).
     then(function(Apartments) {
