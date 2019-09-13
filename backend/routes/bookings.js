@@ -7,6 +7,7 @@ var BookingsModel = require('../models/Bookings.js');
 
 const Bookings = require('../sequalize').Bookings;
 const Apartments = require('../sequalize').Apartments;
+const Gallery = require('../sequalize').Gallery;
 
 // Check the availability of the booking of the selected apartment
 router.get('/check-status/:id/from/:date_start/to/:date_end', function(req, res) {
@@ -57,10 +58,19 @@ router.post('/add', function(req, res) {
 // Show all bookings
 router.get('/show/all', function(req, res) {
     Bookings.findAll({
-        include: [{
-            model: Apartments,
-            as: 'apartment'
-        }] }).
+        include: [
+            {
+                model: Apartments,
+                as: 'apartment',
+                include:  {
+                    model: Gallery,
+                    where: {
+                        default:1
+                    },
+                    required: false
+                }
+            }
+        ] }).
     then(function(Bookings) {
         res.status(200).json({result:Bookings});
     }, function(error) {

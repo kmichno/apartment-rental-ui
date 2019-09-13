@@ -57,11 +57,13 @@ class Bookings extends Component {
     }
 
     render() {
+
         let bookings = this.state.apartmentsList.map((booking) => {
+            console.log(booking.apartment);
             return (
                 <div className="apartment" key={booking.idBooking}>
                     <div className="img">
-
+                        {booking.apartment.Gallery != null ? booking.apartment.Gallery.fileGallery : ""}
                     </div>
                     <div className="description-content">
                         <h3>{booking.apartment.nameApartment}</h3>

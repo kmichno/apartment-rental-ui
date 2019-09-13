@@ -9,6 +9,7 @@ var GalleryModel = require('../models/Gallery.js');
 
 const Gallery = require('../sequalize').Gallery;
 const Apartments = require('../sequalize').Apartments;
+const Bookings = require('../sequalize').Bookings;
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -39,6 +40,44 @@ router.get('/show/all', function(req, res) {
     }).
     then(function(Gallery) {
         res.status(200).json({result:Gallery});
+    }, function(error) {
+        console.log(error);
+        res.status(500).send({result:"error"});
+    });
+});
+
+// Show hotels with parameters
+router.get('/show/all/:start/:end/:numberPeople', function(req, res) {
+    Apartments.findAll({
+        include: [{
+            model: Gallery,
+            where: {
+                default:1
+            },
+            required: false
+        },
+            {
+                model: Bookings,
+                required: false,
+                where: {
+                    start: {
+                        [Sequelize.Op.lt]: new Date(req.params.end)
+                    }, // <=
+                    end: {
+                        [Sequelize.Op.gt]: new Date(req.params.start)
+                    }
+                }
+            }
+        ],
+        attributes: {
+            include:
+                [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
+        },
+        order: [['idApartment', 'DESC']]
+    }).
+    then(function(Apartments) {
+        let apartmentsNotBooked = Apartments.filter(item => item.Bookings.length === 0);
+        res.status(200).json({result:apartmentsNotBooked});
     }, function(error) {
         console.log(error);
         res.status(500).send({result:"error"});

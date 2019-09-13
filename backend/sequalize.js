@@ -11,7 +11,7 @@ const Bookings = BookingsModel(sequelize,Sequelize);
 const Gallery = GalleryModel(sequelize,Sequelize);
 
 Bookings.belongsTo(Apartments, { as:'apartment', foreignKey: 'idApartment', allowNull:true});
-Apartments.hasOne(Bookings, {foreignKey: 'idApartment', allowNull:true});
+Apartments.hasMany(Bookings, {foreignKey: 'idApartment', allowNull:true});
 
 Gallery.belongsTo(Apartments, { as:'apartment', foreignKey: 'idApartment', allowNull:true});
 Apartments.hasOne(Gallery, {foreignKey: 'idApartment', allowNull:true});
