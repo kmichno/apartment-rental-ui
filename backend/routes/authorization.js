@@ -7,6 +7,7 @@ var UsersModel = require('../models/Users.js');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var connectionFacebook = require('../facebook.js');
+const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
 
 passport.use(new FacebookStrategy(connectionFacebook.facebookParameters,
 
@@ -71,7 +72,9 @@ router.get('/login', passport.authenticate('facebook'));
 
 // Logout user
 router.get('/logout', function (req, res) {
-        res.status(200).json({ result: "ok"});
+        //res.status(200).json({ result: "ok"});
+        req.logout();
+        res.redirect(CLIENT_HOME_PAGE_URL);
 });
 
 // Check if the user is logged
@@ -92,7 +95,11 @@ router.get('/details', function (req, res) {
                 result: {
                     "name":req.user.name,
                     "idUser": UsersCheck[0].idUser,
-                    "isAdmin": UsersCheck[0].isAdmin
+                    "isAdmin": UsersCheck[0].isAdmin,
+                    "cookies": req.cookies,
+                    "success": true,
+                    "message": "user has successfully authenticated",
+                    "user": req.user
                 } });
         }, function(error) { });
     }
@@ -137,7 +144,8 @@ router.put('/admin-permission/unset/user/:id', function (req, res) {
 
 router.get('/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect : '/authorization/success', // redirect to the secure profile section
+        //successRedirect : '/authorization/success', // redirect to the secure profile section
+        successRedirect : CLIENT_HOME_PAGE_URL, // redirect to the secure profile section
         failureRedirect : '/authorization/failure', // redirect back to the signup page if there is an error
     }));
 
