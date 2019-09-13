@@ -33,8 +33,8 @@ class ApartmentAdministration extends Component {
         })
     }
 
-    deleteApartment(idBooking) {
-        const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
+    deleteApartment(idApartment) {
+        const url = "http://localhost:8080/apartments/delete/"+idApartment;
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -44,7 +44,7 @@ class ApartmentAdministration extends Component {
         });
     }
 
-    handleSubmit (idApartment) {
+    handleDelete (idApartment) {
         return event => {
             event.preventDefault();
             this.deleteApartment(idApartment);
@@ -71,7 +71,7 @@ class ApartmentAdministration extends Component {
                         <div className="place-button">
                             <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
                             <div className="button"><NavLink to={`/admin/apartment/edit/17`}>Edytuj dane</NavLink></div>
-                            <div className="button" onClick={()=>{this.deleteApartment(apartment.idApartment)}}>Usuń apartament</div>
+                            <div className="button" onClick={this.handleDelete(apartment.idApartment)}>Usuń apartament</div>
                         </div>
                     </div>
                 </div>
