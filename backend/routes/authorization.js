@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
 var Sequelize=require('sequelize');
 var connectionDatabase = require('../database.js');
 const sequelize = new Sequelize(connectionDatabase.databaseParameters);
@@ -84,13 +85,16 @@ router.get('/check', function (req, res) {
 
 // Show details about logged user
 router.get('/details', function (req, res) {
+   // console.log("debug 1 "+req.user);
     if (req.user){
+        //console.log("debug 2");
         //console.log ("Found user with provider id"+req.user.user);
         UsersModel(sequelize).findAll({
             where: {
                 idProvider: req.user.user
             },}).
         then(function(UsersCheck) {
+
             res.status(200).json({
                 result: {
                     "name":req.user.name,
@@ -101,11 +105,12 @@ router.get('/details', function (req, res) {
                     "message": "user has successfully authenticated",
                     "user": req.user
                 } });
+
         }, function(error) { });
     }
-    else {
-        res.status(200).json({ result: null});
-    }
+    //else {
+    //    res.status(200).json({ result: null});
+    //}
 
 });
 
