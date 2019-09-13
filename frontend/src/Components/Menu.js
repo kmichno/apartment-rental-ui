@@ -17,6 +17,7 @@ export default class Menu extends Component {
     };
 
     componentDidMount() {
+        console.log("did mount");
           fetch("http://localhost:8080/authorization/details", {
             mode: 'cors',
             method: "GET",
@@ -34,10 +35,12 @@ export default class Menu extends Component {
             })
             .then(responseJson => {
                 console.log("auth Response json");
-                this.setState({
-                    authenticated: true,
-                    user: responseJson.user
-                });
+
+                    this.setState({
+                        authenticated: true,
+                        user: responseJson.result.user
+                    });
+                    console.log( "test "+JSON.stringify(responseJson.result.user));
             })
             .catch(error => {
                 console.log("Auth error");
@@ -50,7 +53,8 @@ export default class Menu extends Component {
 
     render() {
         const { authenticated } = this.state;
-       // console.log("Render "+this.state.user.name);
+        console.log("Render ");
+
         return (
         <div id="nav-bar">
             <ul>
@@ -61,9 +65,9 @@ export default class Menu extends Component {
                 <Authentication authenticated={authenticated}
                                 handleNotAuthenticated={this._handleNotAuthenticated}/>
                  {!authenticated ? (
-                     <li><NavLink to="#">Status - niezalogowany</NavLink></li>
+                     <li onClick={this._handleSignInClick}><NavLink to="#">Zaloguj</NavLink></li>
                     ) : (
-                     <li><NavLink to="#">Status - zalogowany</NavLink></li>
+                     <li onClick={this._handleLogoutClick}><NavLink to="#">Wyloguj ({this.state.user.name})</NavLink></li>
                     )}
             </ul>
         </div>
@@ -73,4 +77,13 @@ export default class Menu extends Component {
     _handleNotAuthenticated = () => {
         this.setState({ authenticated: false });
     };
+    _handleSignInClick = () => {
+        window.open("http://localhost:8080/authorization/login", "_self");
+    };
+
+    _handleLogoutClick = () => {
+        window.open("http://localhost:8080/authorization/logout", "_self");
+        this.props.handleNotAuthenticated();
+    };
+
 }

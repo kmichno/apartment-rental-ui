@@ -9,26 +9,11 @@ export default class Authentication extends Component {
     };
 
     render() {
-        const { authenticated } = this.props;
-        console.log("Status auth "+authenticated);
+        const {authenticated} = this.props;
+        console.log("Status auth " + authenticated);
         return (
-
             <React.Fragment>
-                {authenticated ? (
-                    <li onClick={this._handleLogoutClick}><NavLink to="#">Wyloguj</NavLink></li>
-                ) : (
-                    <li onClick={this._handleSignInClick}><NavLink to="#">Zaloguj</NavLink></li>
-                )}
             </React.Fragment>
         );
     }
-
-    _handleSignInClick = () => {
-        window.open("http://localhost:8080/authorization/login", "_self");
-    };
-
-    _handleLogoutClick = () => {
-        window.open("http://localhost:8080/authorization/logout", "_self");
-        this.props.handleNotAuthenticated();
-    };
 }
