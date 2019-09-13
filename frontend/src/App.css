@@ -1,3 +1,8 @@
+body {
+  background-image: url("/bg.png");
+  background-repeat: repeat;
+}
+
 .App {
   text-align: center;
 }
@@ -35,12 +40,13 @@
 #container {
   width: 1080px;
   margin: 0px auto;
-  background-color: #FFFFCA;
+  background-color: #eceeff;
 }
 
 #logo {
   height: 60px;
-  background-color: #771700;
+  background-image: url("/bg-header.png");
+  background-repeat: repeat;
 }
 
 #logo h1 {
@@ -51,12 +57,13 @@
   font-weight: bold;
   line-height: 19.8px;
   padding: 20px;
-  color: #FF9200;
+  color: #F2F2F2;
 }
 
 #nav-bar {
   height: 60px;
-  background-color: #771700;
+  background-image: url("/bg-header.png");
+  background-repeat: repeat;
 
 }
 
@@ -73,15 +80,17 @@
 }
 #nav-bar li a{
   display: block;
+  font-weight:bold;
   text-decoration: none;
   padding: 20px;
   height: 20px;
-  color: #FFFFCA;
+  color: #f2f2f2;
 }
 
 #nav-bar li a:hover {
-  background-color: #FF9200;
-  color: #771700;
+  background-color: #F2F2F2;
+  font-weight:bold;
+  color: #006699;
 }
 #left-side {
   width: 260px;
@@ -92,7 +101,7 @@
 #search-box {
   margin-top: 20px;
   height: 400px;
-  background-color: #FF9200;
+  background-color: #48484a;
 }
 
 #right-side {
@@ -201,9 +210,14 @@
   text-decoration: none;
   padding: 10px;
   color: #FFFFCA;
-  background-color: #61dafb;
+  background-color: #303141;
   margin-top: 20px;
   cursor: pointer;
+}
+
+.button a{
+  text-decoration: none;
+  color: #FFFFCA;
 }
 
 #footer {
