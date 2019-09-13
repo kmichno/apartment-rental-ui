@@ -90,5 +90,4 @@ typings/
 # custom
 database.js
 facebook.js
-uploads/*
 /.idea/
