@@ -3,6 +3,9 @@ import {NavLink} from "react-router-dom";
 import PropTypes from "prop-types";
 import Authentication from "./Authentication";
 
+//  {this.state.idUser} - id current user (1,2, etc)
+//  {this.state.isAdmin} - check current user is admin (0 or 1)
+
 export default class Menu extends Component {
     static propTypes = {
         user: PropTypes.shape({
@@ -12,7 +15,8 @@ export default class Menu extends Component {
 
     state = {
         user: {},
-        error: null,
+        idUser: null,
+        isAdmin: null,
         authenticated: false
     };
 
@@ -38,7 +42,9 @@ export default class Menu extends Component {
 
                     this.setState({
                         authenticated: true,
-                        user: responseJson.result.user
+                        user: responseJson.result.user,
+                        idUser: responseJson.result.idUser,
+                        isAdmin: responseJson.result.isAdmin,
                     });
                     console.log( "test "+JSON.stringify(responseJson.result.user));
             })
@@ -46,7 +52,6 @@ export default class Menu extends Component {
                 console.log("Auth error");
                 this.setState({
                     authenticated: false,
-                    error: "Failed to authenticate user"
                 });
             });
     }

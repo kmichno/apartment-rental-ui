@@ -101,8 +101,6 @@ router.get('/details', function (req, res) {
                     "idUser": UsersCheck[0].idUser,
                     "isAdmin": UsersCheck[0].isAdmin,
                     "cookies": req.cookies,
-                    "success": true,
-                    "message": "user has successfully authenticated",
                     "user": req.user
                 } });
 
