@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import LeftSide from './LeftSide';
 
+
 class MainPage extends Component {
 
     constructor() {
@@ -52,6 +53,8 @@ class MainPage extends Component {
             this.setState({bookings: apartments})
         })
     }
+
+
 
     render() {
         return (
