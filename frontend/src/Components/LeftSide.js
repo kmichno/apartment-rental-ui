@@ -7,6 +7,8 @@ import momentLocalizer from 'react-widgets-moment';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import 'react-widgets/dist/css/react-widgets.css';
 
+import { Route, Redirect } from 'react-router-dom';
+
 Moment.locale('pl');
 momentLocalizer();
 
@@ -21,6 +23,7 @@ class LeftSide extends Component {
             dateTo: "",
             city: "",
             numberPeople: "",
+            auth: false,
         };
     }
 
@@ -51,6 +54,7 @@ class LeftSide extends Component {
 
     handleChange(e){
         this.setState({[e.target.name]: e.target.value})
+        console.log(this.state.dateFrom)
     }
 
     handleSubmit =
@@ -58,10 +62,15 @@ class LeftSide extends Component {
             event.preventDefault();
             // this.togglePopup();
             // this.addApartment();
-
+            console.log("sfsdf");
+            this.setState({auth: true})
         }
 
     render() {
+        if(this.state.auth) {
+            const url = "/apartments/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople;
+            return <Redirect to={{pathname: url}}/>
+        }
         console.log(this.state.dateFrom)
         return (
             <div id="left-side">
@@ -77,7 +86,6 @@ class LeftSide extends Component {
                                 <DateTimePicker format={"dddd DD.MM.YYYY"}
                                                 onChange={value => this.setState({ dateFrom: moment(value).format('YYYY-MM-DD') })}
                                                 time={false}
-                                                defaultValue={new Date()}
                                 />
                             </div>
                             <div className="row-search">
@@ -92,7 +100,7 @@ class LeftSide extends Component {
                                 <input className="input-search" type="number" required id="name" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                             </div>
                             <div className="row-search">
-                                <input className="button" type="button" value="Wyszukaj"/>
+                                <button className="button">Wyszukaj</button>
                             </div>
                         </form>
                     </div>

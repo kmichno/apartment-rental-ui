@@ -5,7 +5,7 @@ import Footer from './Footer';
 import LeftSide from './LeftSide';
 
 
-class MainPage extends Component {
+class ApartmentsCriteria extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -111,4 +111,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default ApartmentsCriteria;
