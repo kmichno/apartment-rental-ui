@@ -16,10 +16,11 @@ ReactDOM.render(<DateTimePicker />, document.getElementById('root'));
 
 class LeftSide extends Component {
 
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
+        console.log()
         this.state = {
-            dateFrom: "",
+            dateFrom: this.props.dateFrom,
             dateTo: "",
             city: "",
             numberPeople: "",
@@ -68,7 +69,7 @@ class LeftSide extends Component {
 
     render() {
         if(this.state.auth) {
-            const url = "/apartments/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople;
+            const url = "/apartments/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople+"/"+this.state.city;
             return <Redirect to={{pathname: url}}/>
         }
         console.log(this.state.dateFrom)

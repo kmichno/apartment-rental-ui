@@ -11,7 +11,7 @@ import ApartmentsCriteria from './Components/ApartmentsCriteria';
 export default (
     <React.Fragment>​
         <Route exact path="/" component={MainPage} myname={"Main page"}/>
-        <Route path="/apartments/:dateFrom/:dateTo/:numberPeople" component={ApartmentsCriteria} myname={"Main page"}/>
+        <Route path="/apartments/:dateFrom/:dateTo/:numberPeople/:city" component={ApartmentsCriteria} myname={"Main page"}/>
         <Route path="/apartment/details/:idApartment" component={ApartmentDetails} name = "Szczegoly apartamentu" />
         <Route path="/bookings" component={Bookings} name = "Moje rezerwacje" />
         <Route path="/admin/apartments" component={ApartmentAdministration} name = "Administracja apartamentami" />

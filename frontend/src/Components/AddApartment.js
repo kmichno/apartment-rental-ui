@@ -3,12 +3,14 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
 import Popup from './Popup';
+import ImageUploader from 'react-images-upload';
 
 class AddApartment extends Component {
 
     constructor() {
         super();
         this.state = {
+            pictures: [],
             showPopup: false,
             nameApartment: "",
             city: "",
@@ -18,13 +20,20 @@ class AddApartment extends Component {
             numberPeople: "",
             description: "",
         };
+
+        this.onDrop = this.onDrop.bind(this);
     }
 
     componentDidMount() {
 
     }
 
-
+    onDrop(picture) {
+            console.log(picture);
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
 
     addApartment(data) {
         console.log(data);
@@ -105,6 +114,14 @@ class AddApartment extends Component {
                                             <label htmlFor="msg">Opis apartamentu:</label>
                                             <textarea id="msg" required  name="description" value={this.state.description} onChange={(e) => this.handleChange(e)} ></textarea>
                                         </div>
+                                        <ImageUploader
+                                            withIcon={true}
+                                            buttonText='Choose images'
+                                            onChange={this.onDrop}
+                                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                            maxFileSize={5242880}
+                                            withPreview={true}
+                                        />
                                         <button className="button">Dodaj apartament</button>
                                         {this.state.showPopup ?
                                             <Popup

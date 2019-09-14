@@ -11,9 +11,10 @@ class ApartmentsCriteria extends Component {
         super(props, context);
         this.state = {
             apartments: [],
-            dateFrom: this.props.match.params.idApartment,
-            dateTo: this.props.match.params.idApartment,
-            numberPeople: this.props.match.params.idApartment,
+            dateFrom: this.props.match.params.dateFrom,
+            dateTo: this.props.match.params.dateTo,
+            numberPeople: this.props.match.params.numberPeople,
+            city: this.props.match.params.city,
         };
 
     }
@@ -27,7 +28,7 @@ class ApartmentsCriteria extends Component {
     }
 
     getApartmentsByCriteria() {
-        var url = "http://localhost:8080/apartments/show/all/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople;
+        var url = "http://localhost:8080/apartments/show/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople+"/"+this.state.city;
 
         fetch(url, {
             mode: 'cors',
@@ -67,33 +68,45 @@ class ApartmentsCriteria extends Component {
     }
 
     render() {
-        let apartments = this.state.apartments.map((apartment) => {
-            return (
-                <div className="apartment" key={apartment.idApartment}>
-                    <div className="img">
-                        {apartment.filePath}
-                    </div>
-                    <div className="description-content">
-                        <h3>{apartment.nameApartment}</h3>
-                        <p className="city">{apartment.city}</p>
-                        <div className="description">{apartment.description}</div>
-                        <div className="price">
-                            <p>Cena: {apartment.priceDay} zł</p>
+        console.log(this.state.apartments);
+        let apartments = "";
+        if(this.state.apartments.length === 0) {
+            apartments = this.state.apartments.map((apartment) => {
+                return (
+                    <div>Brak apartamentów</div>
+                )
+            });
+
+        } else
+            {
+                apartments = this.state.apartments.map((apartment) => {
+                    return (
+                        <div className="apartment" key={apartment.idApartment}>
+                            <div className="img">
+                                {apartment.filePath}
+                            </div>
+                            <div className="description-content">
+                                <h3>{apartment.nameApartment}</h3>
+                                <p className="city">{apartment.city}</p>
+                                <div className="description">{apartment.description}</div>
+                                <div className="price">
+                                    <p>Cena: {apartment.priceDay} zł</p>
+                                </div>
+                                <div className="place-button">
+                                    <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
+                                        szczegóły</NavLink></div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="place-button">
-                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
-                                szczegóły</NavLink></div>
-                        </div>
-                    </div>
-                </div>
-            )
-        });
+                    )
+                });
+            }
         return (
             <React.Fragment>
                 <div id="container">
                     <Header />
                     <div id="content">
-                        <LeftSide />
+                        <LeftSide city={this.state.city} dateFrom={this.state.dateFrom} dateTo={this.state.dateTo} numberPeople={this.state.numberPeople}/>
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <h1>
