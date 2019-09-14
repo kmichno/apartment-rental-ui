@@ -7,7 +7,7 @@ class Header extends Component {
         return (
             <React.Fragment>
             <div id="logo"><h1>
-                Accomodation rental
+                Wynajem Zakwaterowania
             </h1></div>
             <Menu />
             </React.Fragment>
