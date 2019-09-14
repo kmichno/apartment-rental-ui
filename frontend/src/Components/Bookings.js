@@ -69,9 +69,20 @@ class Bookings extends Component {
                         <h3>{booking.apartment.nameApartment}</h3>
                         <p className="city">{booking.apartment.city}</p>
                         <div className="price">
-                            <p>Status: {booking.status}</p>
+                            <p>Status: {booking.status === "unconfirmed" ? (
+
+                                    <b className="bookings-unconfirmed">Niepotwierdzona</b>
+
+                            ) : booking.status === "confirmed" ? (
+
+                                    <b className="bookings-confirmed">Potwierdzona</b>
+
+                            ) : booking.status === "canceled" ? (
+                                    <b className="bookings-canceled">Anulowana</b>
+                                )
+                                : ""}</p>
                             <p>Od {booking.start} do {booking.end}</p>
-                            <p>Max. ilość ludzi: {booking.apartment.numberPeople}</p>
+                            <p>Max. ilość osób: {booking.apartment.numberPeople}</p>
                             <p>Cena: {booking.apartment.priceDay} zł</p>
                         </div>
                         <div className="place-button">

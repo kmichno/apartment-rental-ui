@@ -80,9 +80,11 @@ router.get('/show/all', function(req, res) {
             include:
                 [
                     [Sequelize.fn('date_format',Sequelize.col("start"),'%d.%m.%Y'),'startFormat'],
-                    [Sequelize.fn('date_format',Sequelize.col("end"),'%d.%m.%Y'),'endFormat']
+                    [Sequelize.fn('date_format',Sequelize.col("end"),'%d.%m.%Y'),'endFormat'],
+                    [Sequelize.literal('DATEDIFF(end,start)+1'), 'rentingDays']
                 ]
         },
+
         order: [['idBooking', 'DESC']]}).
     then(function(Bookings) {
         res.status(200).json({result:Bookings});
@@ -99,7 +101,7 @@ router.put('/change/:id/confirm', function(req, res) {
          },
         {
             where: {
-                idApartment: req.params.id
+                idBooking: req.params.id
             }}).
     then(function(Bookings) {
             res.status(200).json({result: "ok"});
@@ -115,7 +117,7 @@ router.put('/change/:id/cancel', function(req, res) {
         },
         {
             where: {
-                idApartment: req.params.id  }
+                idBooking: req.params.id  }
         }).
     then(function(Bookings) {
         res.status(200).json({result: "ok"});
