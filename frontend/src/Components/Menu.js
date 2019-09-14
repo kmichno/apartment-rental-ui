@@ -65,7 +65,7 @@ export default class Menu extends Component {
             <ul>
                 <li><NavLink to="/">Strona Główna</NavLink></li>
                 <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                <li><NavLink to="/admin/apartments"><span>Administracja</span></NavLink></li>
+                <li><NavLink to="/admin/dashboard"><span>Administracja</span></NavLink></li>
                 <Authentication authenticated={authenticated}
                                 handleNotAuthenticated={this._handleNotAuthenticated}/>
                  {!authenticated ? (

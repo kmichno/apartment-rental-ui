@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
+import AdministrationPanel from "./AdministrationPanel";
 
 class ApartmentAdministration extends Component {
 
@@ -85,9 +86,10 @@ class ApartmentAdministration extends Component {
                         <LeftSide />
                         <div id="right-side">
                             <div id="right-side-inner">
+                                <AdministrationPanel />
                                 <div><NavLink to={`apartment/add`}>Dodaj nowy apartament</NavLink></div>
                                 <h1>
-                                    Edytuj apartament:
+                                    Zarządzaj apartamentami:
                                 </h1>
                                 {apartments}
                             </div>
