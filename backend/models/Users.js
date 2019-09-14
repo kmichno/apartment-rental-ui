@@ -1,9 +1,7 @@
-var Sequelize=require('sequelize');
-var connectionDatabase = require('../database.js');
-const sequelize = new Sequelize(connectionDatabase.databaseParameters);
+const Sequelize = require('sequelize');
 
-module.exports = function (sequelize)  {
-    return sequelize.define('Users',{
+module.exports = (sequelize, type) => {
+    const users=sequelize.define('Users',{
         "idUser": {
             type: Sequelize.DataTypes.INTEGER,
             autoIncrement: true,
@@ -15,5 +13,6 @@ module.exports = function (sequelize)  {
         "isAdmin": Sequelize.INTEGER,
         "dateRegistration": Sequelize.DATE,
         "dateLastLogin": Sequelize.DATE
-    })
+    });
+    return users;
 }

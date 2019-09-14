@@ -66,6 +66,9 @@ GET http://localhost:8080/authorization/check
 # Show details about user if is logged (name, id)
 GET http://localhost:8080/authorization/details
 
+# Show information about all users
+GET http://localhost:8080/authorization/show/all
+
 # Set admin permission (parameters @id is user id)
 PUT http://localhost:8080/authorization/admin-permission/set/user/@id
 

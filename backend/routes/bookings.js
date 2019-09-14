@@ -8,6 +8,7 @@ var BookingsModel = require('../models/Bookings.js');
 const Bookings = require('../sequalize').Bookings;
 const Apartments = require('../sequalize').Apartments;
 const Gallery = require('../sequalize').Gallery;
+const Users = require('../sequalize').Users;
 
 // Check the availability of the booking of the selected apartment
 router.get('/check-status/:id/from/:date_start/to/:date_end', function(req, res) {
@@ -69,8 +70,20 @@ router.get('/show/all', function(req, res) {
                     },
                     required: false
                 }
+            },
+ /*           {
+                model: Users,
+                required: false
             }
-        ] }).
+ */       ],
+        attributes: {
+            include:
+                [
+                    [Sequelize.fn('date_format',Sequelize.col("start"),'%d.%m.%Y'),'startFormat'],
+                    [Sequelize.fn('date_format',Sequelize.col("end"),'%d.%m.%Y'),'endFormat']
+                ]
+        },
+        order: [['idBooking', 'DESC']]}).
     then(function(Bookings) {
         res.status(200).json({result:Bookings});
     }, function(error) {

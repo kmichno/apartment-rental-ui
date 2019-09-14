@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
 import AdministrationPanel from "./AdministrationPanel";
-import { Button } from 'reactstrap'
 
 class UsersAdministration extends Component {
 
