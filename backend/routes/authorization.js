@@ -145,6 +145,27 @@ router.put('/admin-permission/unset/user/:id', function (req, res) {
     });
 });
 
+// Show all users
+router.get('/show/all', function(req, res) {
+    UsersModel(sequelize).findAll({
+        attributes: {
+            include:
+                [
+                    [Sequelize.fn('date_format',Sequelize.col("dateRegistration"),'%d-%m-%Y %H:%m:%s'),'dateRegistrationFormat'],
+                    [Sequelize.fn('date_format',Sequelize.col("dateLastLogin"),'%d-%m-%Y %H:%m:%s'),'dateLastLoginFormat']
+                ]
+
+        },
+        order: [['name', 'ASC']]
+    }).
+    then(function(Users) {
+        res.status(200).json({result:Users});
+    }, function(error) {
+        console.log(error);
+        res.status(500).send({result:"error"});
+    });
+});
+
 router.get('/facebook/callback',
     passport.authenticate('facebook', {
         //successRedirect : '/authorization/success', // redirect to the secure profile section

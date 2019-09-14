@@ -4,6 +4,7 @@ import Header from "./Header";
 import LeftSide from "./LeftSide";
 import Popup from './Popup';
 import ImageUploader from 'react-images-upload';
+import AdministrationPanel from "./AdministrationPanel";
 
 class AddApartment extends Component {
 
@@ -81,6 +82,7 @@ class AddApartment extends Component {
                         <LeftSide />
                         <div id="right-side">
                             <div id="right-side-inner">
+                                <AdministrationPanel />
                                 <h1>
                                     Dodaj apartament:
                                 </h1>
