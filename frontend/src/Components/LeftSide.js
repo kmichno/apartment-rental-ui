@@ -97,7 +97,7 @@ class LeftSide extends Component {
                             </div>
                             <div className="row-search">
                                 <label htmlFor="name">Maksymalna ilość osób:</label>
-                                <input className="input-search" type="number" required id="name" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
+                                <input className="input-search" type="number" required id="name" min="1" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                             </div>
                             <div className="row-search">
                                 <button className="button">Wyszukaj</button>

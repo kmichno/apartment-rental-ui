@@ -119,11 +119,11 @@ class EditApartment extends Component {
                                             <input type="text" required id="code" name="code" value={this.state.code} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
-                                            <label htmlFor="mail">Cena za noc:</label>
+                                            <label htmlFor="mail">Cena za 1 dzień:</label>
                                             <input type="number" required  id="code" name="priceDay" value={this.state.priceDay} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>
-                                            <label htmlFor="mail">Maksymalna ilość ludzi:</label>
+                                            <label htmlFor="mail">Maksymalna ilość osób:</label>
                                             <input type="number" required  id="code" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                                         </div>
                                         <div>

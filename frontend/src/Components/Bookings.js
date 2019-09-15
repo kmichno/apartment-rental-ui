@@ -83,7 +83,7 @@ class Bookings extends Component {
                                 : ""}</p>
                             <p>Od {booking.start} do {booking.end}</p>
                             <p>Max. ilość osób: {booking.apartment.numberPeople}</p>
-                            <p>Cena: {booking.apartment.priceDay} zł</p>
+                            <p>Cena: {booking.apartment.priceDay} zł (1 dzień)</p>
                         </div>
                         <div className="place-button">
                             <form onSubmit={this.handleSubmit(booking.idBooking)}>

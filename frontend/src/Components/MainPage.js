@@ -78,7 +78,7 @@ class MainPage extends Component {
                         <p className="city">{apartment.city}</p>
                         <div className="description">{apartment.description}</div>
                         <div className="price">
-                            <p>Cena: {apartment.priceDay} zł</p>
+                            <p>Cena: {apartment.priceDay} zł (1 dzień)</p>
                         </div>
                         <div className="place-button">
                             <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz

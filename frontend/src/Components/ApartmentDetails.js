@@ -84,8 +84,8 @@ class ApartmentDetails extends Component {
                                         <p className="additional-info">Dodatkowe informacje</p>
                                         <div className="additional-description">{this.state.apartment.additionalDescription}</div>
                                         <div className="price">
-                                            <p>Max. ilość ludzi: {this.state.apartment.numberPeople}</p>
-                                            <p>Cena: {this.state.apartment.priceDay} zł</p>
+                                            <p>Max. ilość osób: {this.state.apartment.numberPeople}</p>
+                                            <p>Cena: {this.state.apartment.priceDay} zł (1 dzień)</p>
                                         </div>
                                         <div className="place-button">
                                             <form onSubmit={this.postData}>
