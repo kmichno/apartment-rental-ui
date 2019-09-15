@@ -81,7 +81,7 @@ router.get('/show/all', function(req, res) {
                 [
                     [Sequelize.fn('date_format',Sequelize.col("start"),'%d.%m.%Y'),'startFormat'],
                     [Sequelize.fn('date_format',Sequelize.col("end"),'%d.%m.%Y'),'endFormat'],
-                    [Sequelize.literal('DATEDIFF(end,start)+1'), 'rentingDays']
+                    [Sequelize.literal('DATEDIFF(end,start)+1'), 'rentingDays'],
                 ]
         },
 

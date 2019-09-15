@@ -140,12 +140,27 @@ router.post('/add', function(req, res) {
 
 // Show hotel by ID
 router.get('/show/:id', function(req, res) {
-    ApartmentsModel (sequelize).findAll({
-        where: {idApartment: req.params.id
-        },}).
-    then(function(Apartments) {
-        res.status(200).json({result:Apartments[0]});
+    Apartments.findAll({
+        include: [{
+            model: Gallery,
+            where: {
+                default:1
+            },
+            required: false
+        }],
+        attributes: {
+            include:
+                [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
+        },
+        where: {
+            idApartment: req.params.id
+        },
+        order: [['idApartment', 'DESC']]
+    }).
+    then(function(Gallery) {
+        res.status(200).json({result:Gallery[0]});
     }, function(error) {
+        console.log(error);
         res.status(500).send({result:"error"});
     });
 });

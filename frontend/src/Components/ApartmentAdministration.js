@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
 import AdministrationPanel from "./AdministrationPanel";
+import ModalImage from "react-modal-image";
 
 class ApartmentAdministration extends Component {
 
@@ -60,7 +61,13 @@ class ApartmentAdministration extends Component {
             return (
                 <div className="apartment" key={apartment.idApartment}>
                     <div className="img">
-
+                        <ModalImage
+                            className="picture-apartment"
+                            small={"http://localhost:8080/uploads/"+apartment.filePath}
+                            large={"http://localhost:8080/uploads/"+apartment.filePath}
+                            hideDownload="true"
+                            alt={apartment.nameApartment+" ("+apartment.city+")"}
+                        />
                     </div>
                     <div className="description-content">
                         <h3>{apartment.nameApartment}</h3>

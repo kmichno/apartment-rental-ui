@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
+import ModalImage from "react-modal-image";
 
 class ApartmentDetails extends Component {
 
@@ -75,7 +76,13 @@ class ApartmentDetails extends Component {
                                 </h1>
                                 <div className="apartment" key={this.state.apartment.idApartment}>
                                     <div className="img">
-
+                                        <ModalImage
+                                            className="picture-apartment"
+                                            small={"http://localhost:8080/uploads/"+this.state.apartment.filePath}
+                                            large={"http://localhost:8080/uploads/"+this.state.apartment.filePath}
+                                            hideDownload="true"
+                                            alt={this.state.apartment.nameApartment+" ("+this.state.apartment.city+")"}
+                                        />
                                     </div>
                                     <div className="description-content">
                                         <h3>{this.state.apartment.nameApartment}</h3>
