@@ -73,15 +73,15 @@ router.get('/show/:start/:end/:numberPeople/:city', function(req, res) {
             include:
                 [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
         },
-        order: [['idApartment', 'DESC']],
-        where: {
-            city: {
-                [Sequelize.Op.iLike]: "%"+req.params.city+"%"
-            },
-            numberPeople: {
-                [Sequelize.Op.eq]: req.params.numberPeople
-            }
-        }
+        order: [['idApartment', 'DESC']]
+        // where: {
+        //     city: {
+        //         [Sequelize.Op.iLike]: "%"+req.params.city+"%"
+        //     },
+        //     numberPeople: {
+        //         [Sequelize.Op.eq]: req.params.numberPeople
+        //     }
+        // }
     }).
     then(function(Apartments) {
         let apartmentsNotBooked = Apartments.filter(item => item.Bookings.length === 0);

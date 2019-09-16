@@ -15,6 +15,7 @@ export default (
     <React.Fragment>​
         <Route exact path="/" component={MainPage} myname={"Main page"}/>
         <Route path="/apartments/:dateFrom/:dateTo/:numberPeople/:city" component={ApartmentsCriteria} myname={"Main page"}/>
+        <Route path="/apartment/details/:idApartment/:dateFrom/:dateTo" component={ApartmentDetails} name = "Szczegoly apartamentu" />
         <Route path="/apartment/details/:idApartment" component={ApartmentDetails} name = "Szczegoly apartamentu" />
         <Route path="/bookings" component={Bookings} name = "Moje rezerwacje" />
         <Route path="/admin/dashboard" component={AdminDashboard} name = "Panel administracyjny" />

@@ -88,7 +88,7 @@ class MainPage extends Component {
                             <p>Cena: {apartment.priceDay} zł (1 dzień)</p>
                         </div>
                         <div className="place-button">
-                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
+                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}/${apartment.dateFrom}/${apartment.dateTo}`}>Zobacz
                                 szczegóły</NavLink></div>
                         </div>
                     </div>

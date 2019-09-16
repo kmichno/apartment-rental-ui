@@ -9,6 +9,7 @@ class ApartmentsCriteria extends Component {
 
     constructor(props, context) {
         super(props, context);
+        console.log(this.state);
         this.state = {
             apartments: [],
             dateFrom: this.props.match.params.dateFrom,
@@ -69,6 +70,7 @@ class ApartmentsCriteria extends Component {
 
     render() {
         console.log(this.state.apartments);
+        let days = (new Date(this.state.dateTo) - new Date(this.state.dateFrom)) / (1000 * 3600 * 24);
         let apartments = "";
         if(this.state.apartments.length === 0) {
             apartments = this.state.apartments.map((apartment) => {
@@ -83,17 +85,22 @@ class ApartmentsCriteria extends Component {
                     return (
                         <div className="apartment" key={apartment.idApartment}>
                             <div className="img">
-                                {apartment.filePath}
+                                <div className="img-inner">
+                                    {apartment.filePath}
+                                </div>
                             </div>
                             <div className="description-content">
                                 <h3>{apartment.nameApartment}</h3>
                                 <p className="city">{apartment.city}</p>
                                 <div className="description">{apartment.description}</div>
                                 <div className="price">
-                                    <p>Cena: {apartment.priceDay} zł (1 dzień)</p>
+                                    {this.state.dateFrom != null ?
+                                        <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p> : ""
+                                    }
+                                    <p>Cena: {apartment.priceDay} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
                                 </div>
                                 <div className="place-button">
-                                    <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
+                                    <div className="button"><NavLink to={`/apartment/details/${apartment.idApartment}/${this.state.dateFrom}/${this.state.dateTo}`}>Zobacz
                                         szczegóły</NavLink></div>
                                 </div>
                             </div>

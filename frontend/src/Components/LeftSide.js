@@ -6,7 +6,7 @@ import momentLocalizer from 'react-widgets-moment';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import 'react-widgets/dist/css/react-widgets.css';
 
-import { Route, Redirect } from 'react-router-dom';
+import {Route, Redirect, NavLink} from 'react-router-dom';
 
 Moment.locale('pl');
 momentLocalizer();
@@ -72,11 +72,12 @@ class LeftSide extends Component {
             return <Redirect to={{pathname: url}}/>
         }
         console.log(this.state.dateFrom)
+        const url = "/apartments/"+this.state.dateFrom+"/"+this.state.dateTo+"/"+this.state.numberPeople+"/"+this.state.city;
         return (
             <div id="left-side">
                 <div id="search-box">
                     <div id="search-box-inner">
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit} action={url}>
                             <div className="row-search">
                                 <label htmlFor="name">Miasto:</label>
                                 <input className="input-search" type="text" required id="name" name="city" value={this.state.city} onChange={(e) => this.handleChange(e)} />
@@ -100,7 +101,8 @@ class LeftSide extends Component {
                                 <input className="input-search" type="number" required id="name" min="1" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                             </div>
                             <div className="row-search">
-                                <button className="button">Wyszukaj</button>
+                                <p onClick={this.handleSubmit}>Wyszukaj</p>
+                                {/*<NavLink to={`/apartments/${this.state.dateFrom}/${this.state.dateTo}/${this.state.numberPeople}/${this.state.city}`}>Wyszukaj</NavLink>*/}
                             </div>
                         </form>
                     </div>

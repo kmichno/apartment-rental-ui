@@ -13,6 +13,8 @@ class ApartmentDetails extends Component {
         this.state = {
             apartment: 0,
             idApartment: this.props.match.params.idApartment,
+            dateFrom: this.props.match.params.dateFrom,
+            dateTo: this.props.match.params.dateTo,
         };
     }
 
@@ -57,7 +59,7 @@ class ApartmentDetails extends Component {
     postData = (event) => {
         event.preventDefault();
         console.log(this.state.apartment.idApartment);
-        this.bookApartment(this.state.apartment.idApartment, 1, 1, 1)
+        this.bookApartment(this.state.apartment.idApartment, 1, this.state.dateFrom, this.state.dateTo)
     }
 
 
@@ -91,6 +93,7 @@ class ApartmentDetails extends Component {
                                         <p className="additional-info">Dodatkowe informacje</p>
                                         <div className="additional-description">{this.state.apartment.additionalDescription}</div>
                                         <div className="price">
+                                            <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p>
                                             <p>Max. ilość osób: {this.state.apartment.numberPeople}</p>
                                             <p>Cena: {this.state.apartment.priceDay} zł (1 dzień)</p>
                                         </div>

@@ -43,8 +43,8 @@ router.post('/add', function(req, res) {
     var insertBookings = {
         "idApartment": req.body.idApartment,
         "idUser": req.body.idUser,
-        "start": "2019-11-06", //req.body.start,
-        "end": "2019-11-07", //req.body.end,
+        "start": req.body.start, //req.body.start,
+        "end": req.body.end, //req.body.end,
         "status": 'unconfirmed'
     }
     BookingsModel (sequelize).create(insertBookings).
