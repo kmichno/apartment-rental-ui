@@ -21,7 +21,6 @@ export default class Menu extends Component {
     };
 
     componentDidMount() {
-        console.log("did mount");
           fetch("http://localhost:8080/authorization/details", {
             mode: 'cors',
             method: "GET",
@@ -33,12 +32,10 @@ export default class Menu extends Component {
             }
         })
             .then(response => {
-                console.log("Auth response");
                 if (response.status === 200) return response.json();
                 throw new Error("failed to authenticate user");
             })
             .then(responseJson => {
-                console.log("auth Response json");
 
                     this.setState({
                         authenticated: true,
@@ -47,6 +44,8 @@ export default class Menu extends Component {
                         isAdmin: responseJson.result.isAdmin,
                     });
                     console.log( "test "+JSON.stringify(responseJson.result.user));
+                    global.idUser=responseJson.result.idUser;
+                    global.isAdmin=responseJson.result.isAdmin;
             })
             .catch(error => {
                 console.log("Auth error");
@@ -58,14 +57,16 @@ export default class Menu extends Component {
 
     render() {
         const { authenticated } = this.state;
-        console.log("Render ");
+
 
         return (
         <div id="nav-bar">
             <ul>
                 <li><NavLink to="/">Strona Główna</NavLink></li>
                 <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                <li><NavLink to="/admin/dashboard"><span>Administracja</span></NavLink></li>
+                {global.isAdmin==1 ? (
+                    <li><NavLink to="/admin/dashboard"><span>Administracja</span></NavLink></li>
+                ) : ( "" )}
                 <Authentication authenticated={authenticated}
                                 handleNotAuthenticated={this._handleNotAuthenticated}/>
                  {!authenticated ? (

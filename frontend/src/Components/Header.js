@@ -4,6 +4,8 @@ import Menu from "./Menu";
 
 class Header extends Component {
     render() {
+        console.log("Global User "+global.idUser);
+        console.log("Global Admin "+global.isAdmin);
         return (
             <React.Fragment>
             <div id="logo"><h1>
