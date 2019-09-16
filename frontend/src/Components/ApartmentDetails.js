@@ -111,7 +111,7 @@ class ApartmentDetails extends Component {
                                                 <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p> : ""
                                             }
                                             <p>Max. ilość osób: {this.state.apartment.numberPeople}</p>
-                                            <p>Cena: {this.state.apartment.priceDay} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
+                                            <p>Cena: {this.state.apartment.priceDay * days} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
                                         </div>
                                         <div className="place-button">
                                             <form onSubmit={this.postData}>

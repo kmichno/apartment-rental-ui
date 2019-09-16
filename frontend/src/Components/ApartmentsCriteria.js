@@ -71,6 +71,9 @@ class ApartmentsCriteria extends Component {
     render() {
         console.log(this.state.apartments);
         let days = (new Date(this.state.dateTo) - new Date(this.state.dateFrom)) / (1000 * 3600 * 24);
+        if (this.state.dateFrom == null) {
+            days = 1;
+        }
         let apartments = "";
         if(this.state.apartments.length === 0) {
             apartments = this.state.apartments.map((apartment) => {
@@ -97,7 +100,7 @@ class ApartmentsCriteria extends Component {
                                     {this.state.dateFrom != null ?
                                         <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p> : ""
                                     }
-                                    <p>Cena: {apartment.priceDay} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
+                                    <p>Cena: {apartment.priceDay * days} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
                                 </div>
                                 <div className="place-button">
                                     <div className="button"><NavLink to={`/apartment/details/${apartment.idApartment}/${this.state.dateFrom}/${this.state.dateTo}`}>Zobacz
