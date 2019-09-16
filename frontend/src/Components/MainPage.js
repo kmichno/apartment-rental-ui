@@ -85,10 +85,10 @@ class MainPage extends Component {
                         <p className="city">{apartment.city}</p>
                         <div className="description">{apartment.description}</div>
                         <div className="price">
-                            <p>Cena: {apartment.priceDay} zł (1 dzień)</p>
+                            <p>Cena: {apartment.priceDay} zł (za 1 dzień)</p>
                         </div>
                         <div className="place-button">
-                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}/${apartment.dateFrom}/${apartment.dateTo}`}>Zobacz
+                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz
                                 szczegóły</NavLink></div>
                         </div>
                     </div>

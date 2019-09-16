@@ -3,13 +3,15 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
 import ModalImage from "react-modal-image";
+import { findDOMNode } from "react-dom";
+import $ from "jquery";
 
 class ApartmentDetails extends Component {
 
     constructor(props, context) {
         super(props, context);
         console.log(this.props.match.params.idApartment);
-        console.log("fsfsf");
+        console.log(this.props.match.params.dateFrom);
         this.state = {
             apartment: 0,
             idApartment: this.props.match.params.idApartment,
@@ -59,12 +61,24 @@ class ApartmentDetails extends Component {
     postData = (event) => {
         event.preventDefault();
         console.log(this.state.apartment.idApartment);
-        this.bookApartment(this.state.apartment.idApartment, 1, this.state.dateFrom, this.state.dateTo)
+        if(this.state.dateFrom != undefined) {
+            this.bookApartment(this.state.apartment.idApartment, 1, this.state.dateFrom, this.state.dateTo)
+        } else {
+            $("#error-booking").show(300);
+        }
     }
 
 
 
     render() {
+        let days = (new Date(this.state.dateTo) - new Date(this.state.dateFrom)) / (1000 * 3600 * 24);
+        if (this.state.dateFrom == null) {
+            days = 1;
+        }
+        const hide = {
+            display: 'none'
+        };
+        console.log(this.state.dateFrom);
         return (
             <React.Fragment>
                 <div id="container">
@@ -93,14 +107,17 @@ class ApartmentDetails extends Component {
                                         <p className="additional-info">Dodatkowe informacje</p>
                                         <div className="additional-description">{this.state.apartment.additionalDescription}</div>
                                         <div className="price">
-                                            <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p>
+                                            {this.state.dateFrom != null ?
+                                                <p>Czas rezerwacji: {this.state.dateFrom}-{this.state.dateTo}</p> : ""
+                                            }
                                             <p>Max. ilość osób: {this.state.apartment.numberPeople}</p>
-                                            <p>Cena: {this.state.apartment.priceDay} zł (1 dzień)</p>
+                                            <p>Cena: {this.state.apartment.priceDay} zł (za {days} {days == 1 ? "dzień" : "dni"})</p>
                                         </div>
                                         <div className="place-button">
                                             <form onSubmit={this.postData}>
                                                 <button className="button">Rezerwuje</button>
                                             </form>
+                                            <div className="error" style={hide} id="error-booking">Nie można zarezerwować. Proszę wybrać termin w panelu bocznym</div>
                                         </div>
                                     </div>
                                 </div>
