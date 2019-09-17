@@ -94,7 +94,7 @@ class Bookings extends Component {
                                     <b className="bookings-canceled">Anulowana</b>
                                 )
                                 : ""}</p>
-                            <p>Od {booking.start} do {booking.end}</p>
+                            <p>Od {booking.startFormat} do {booking.endFormat}</p>
                             <p>Max. ilość osób: {booking.apartment.numberPeople}</p>
                             <p>Cena: {booking.apartment.priceDay} zł (1 dzień)</p>
                             <p>Cena: {booking.rentingDays * booking.apartment.priceDay} zł (za {booking.rentingDays} {booking.rentingDays == 1 ? "dzień" : "dni"})</p>
