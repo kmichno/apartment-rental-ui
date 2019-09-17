@@ -104,6 +104,10 @@ body {
   background-color: #48484a;
 }
 
+.no-decoration{
+  text-decoration: none !important;
+}
+
 #right-side {
   width: 820px;
   float: right;

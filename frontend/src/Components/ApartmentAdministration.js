@@ -77,7 +77,7 @@ class ApartmentAdministration extends Component {
                             <p>Cena: {apartment.priceDay} zł (1 dzień)</p>
                         </div>
                         <div className="place-button">
-                            <div className="button"><NavLink to={`apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
+                            <div className="button"><NavLink to={`/apartment/details/${apartment.idApartment}`}>Zobacz szczegóły</NavLink></div>
                             <div className="button"><NavLink to={`/admin/apartment/edit/${apartment.idApartment}`}>Edytuj dane</NavLink></div>
                             <div className="button" onClick={this.handleDelete(apartment.idApartment)}>Usuń apartament</div>
                         </div>

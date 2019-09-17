@@ -104,8 +104,12 @@ class BookingsAdministration extends Component{
                 <tbody>
                 <tr key={book.idBooking}>
                     <td>{book.idBooking}</td>
-                    <td>{book.apartment.nameApartment} ({book.apartment.city})</td>
-                    <td>{book.startFormat}r - {book.endFormat}r<br /><button class="button-details"><b>{book.rentingDays} dni</b></button></td>
+                    <td><NavLink className="no-decoration" to={"/apartment/details/"+book.apartment.idApartment}>{book.apartment.nameApartment} ({book.apartment.city})</NavLink></td>
+                    <td>{book.startFormat}r - {book.endFormat}r</td>
+                    <td>
+                        1 dzień - {book.apartment.priceDay} zł<br />
+                        {book.rentingDays} dni - {book.rentingDays * book.apartment.priceDay} zł
+                    </td>
                     <td>{book.status === "unconfirmed" ? (
                         <p>
                             <b className="bookings-unconfirmed">Niepotwierdzona</b><br />
@@ -146,9 +150,10 @@ class BookingsAdministration extends Component{
                                 <table id='details'>
                                     <thead>
                                         <tr>
-                                            <th>Rezerwacja</th>
+                                            <th>ID</th>
                                             <th>Apartament</th>
                                             <th>Termin</th>
+                                            <th>Cena</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
