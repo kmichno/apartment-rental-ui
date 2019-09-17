@@ -94,7 +94,7 @@ class ApartmentAdministration extends Component {
                         <div id="right-side">
                             <div id="right-side-inner">
                                 <AdministrationPanel />
-                                <div><NavLink class="button-details" to={`apartment/add`}>Dodaj nowy apartament</NavLink></div>
+                                <div><NavLink className="button-details" to={`apartment/add`}>Dodaj nowy apartament</NavLink></div>
                                 <h1>
                                     Zarządzaj apartamentami:
                                 </h1>

@@ -36,8 +36,7 @@ class AddApartment extends Component {
         });
     }
 
-    addApartment(data) {
-        console.log(data);
+    addApartment() {
         const url = `http://localhost:8080/apartments/add`;
         fetch(url, {
             method: 'POST',
@@ -54,13 +53,33 @@ class AddApartment extends Component {
                 numberPeople: this.state.numberPeople,
                 description: this.state.description,
             })
+        }).then(results => {
+            console.log(results);
+            return results.json();
         });
     }
+    uploadPhoto(data) {
+        console.log(data);
+        const url = `http://localhost:8080/apartments/upload-photo`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                image: this.state.pictures[0],
+                city: this.state.idApartment
+            })
+        });
+    }
+
     handleSubmit =
          event => {
             event.preventDefault();
             this.togglePopup();
             this.addApartment();
+            this.uploadPhoto();
 
     }
 

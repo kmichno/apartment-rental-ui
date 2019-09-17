@@ -17,12 +17,13 @@ class LeftSide extends Component {
 
     constructor(props, context) {
         super(props, context);
-        console.log()
+        console.log("props:")
+        console.log(this.props)
         this.state = {
             dateFrom: this.props.dateFrom,
-            dateTo: "",
-            city: "",
-            numberPeople: "",
+            dateTo: this.props.dateTo,
+            city: this.props.city,
+            numberPeople: this.props.numberPeople,
             auth: false,
         };
     }
@@ -80,11 +81,12 @@ class LeftSide extends Component {
                         <form onSubmit={this.handleSubmit} action={url}>
                             <div className="row-search">
                                 <label htmlFor="name">Miasto:</label>
-                                <input className="input-search" type="text" required id="name" name="city" value={this.state.city} onChange={(e) => this.handleChange(e)} />
+                                <input className="input-search" type="text" required id="name" name="city" defaultValue={this.state.city} onChange={(e) => this.handleChange(e)} />
                             </div>
                             <div className="row-search">
                                 <label htmlFor="name">Od:</label>
                                 <DateTimePicker format={"dddd DD.MM.YYYY"}
+                                                // value={!value ? this.state.currentTime : new Date(this.state.dateFrom)}
                                                 onChange={value => this.setState({ dateFrom: moment(value).format('YYYY-MM-DD') })}
                                                 time={false}
                                 />
@@ -98,7 +100,7 @@ class LeftSide extends Component {
                             </div>
                             <div className="row-search">
                                 <label htmlFor="name">Maksymalna ilość osób:</label>
-                                <input className="input-search" type="number" required id="name" min="1" name="numberPeople" value={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
+                                <input className="input-search" type="number" required id="name" min="1" name="numberPeople" defaultValue={this.state.numberPeople} onChange={(e) => this.handleChange(e)} />
                             </div>
                             <div className="row-search">
                                 <p onClick={this.handleSubmit}>Wyszukaj</p>

@@ -77,11 +77,9 @@ class ApartmentsCriteria extends Component {
         }
         let apartments = "";
         if(this.state.apartments.length === 0) {
-            apartments = this.state.apartments.map((apartment) => {
-                return (
-                    <div>Brak apartamentów</div>
-                )
-            });
+            apartments = <div>Brak apartamentów</div>
+
+            ;
 
         } else
             {

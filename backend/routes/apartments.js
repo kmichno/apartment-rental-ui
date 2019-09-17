@@ -73,15 +73,15 @@ router.get('/show/:start/:end/:numberPeople/:city', function(req, res) {
             include:
                 [[Sequelize.fn("IFNULL",Sequelize.col("Gallery.fileGallery"),'default.png'),'filePath']]
         },
-        order: [['idApartment', 'DESC']]
-        // where: {
-        //     city: {
-        //         [Sequelize.Op.iLike]: "%"+req.params.city+"%"
-        //     },
-        //     numberPeople: {
-        //         [Sequelize.Op.eq]: req.params.numberPeople
-        //     }
-        // }
+        order: [['idApartment', 'DESC']],
+        where: {
+            city: {
+                [Sequelize.Op.like]: req.params.city
+            },
+            numberPeople: {
+                [Sequelize.Op.eq]: req.params.numberPeople
+            }
+        }
     }).
     then(function(Apartments) {
         let apartmentsNotBooked = Apartments.filter(item => item.Bookings.length === 0);
@@ -132,7 +132,7 @@ router.post('/add', function(req, res) {
     }
     ApartmentsModel (sequelize).create(insertApartaments).
     then(function(Apartments) {
-        res.status(200).json({ result: "ok"});
+        res.status(200).json({ result: Apartments});
     }, function(error) {
         res.status(500).send({ result: "error"});
     });

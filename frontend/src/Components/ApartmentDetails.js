@@ -70,10 +70,10 @@ class ApartmentDetails extends Component {
         console.log(this.state.apartment.idApartment);
         if(this.state.dateFrom != undefined) {
             this.bookApartment(this.state.apartment.idApartment, global.idUser, this.state.dateFrom, this.state.dateTo)
+            this.togglePopup();
         } else {
             $("#error-booking").show(300);
         }
-        this.togglePopup();
     }
 
 
