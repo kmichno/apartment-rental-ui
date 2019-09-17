@@ -62,7 +62,7 @@ class ApartmentDetails extends Component {
         event.preventDefault();
         console.log(this.state.apartment.idApartment);
         if(this.state.dateFrom != undefined) {
-            this.bookApartment(this.state.apartment.idApartment, 1, this.state.dateFrom, this.state.dateTo)
+            this.bookApartment(this.state.apartment.idApartment, global.idUser, this.state.dateFrom, this.state.dateTo)
         } else {
             $("#error-booking").show(300);
         }
