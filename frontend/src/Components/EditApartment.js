@@ -134,6 +134,7 @@ class EditApartment extends Component {
                                         {this.state.showPopup ?
                                             <Popup
                                                 text='Apartament został zedytowany'
+                                                url='/admin/apartments'
                                                 closePopup={this.togglePopup.bind(this)}
                                             />
                                             : null

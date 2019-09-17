@@ -5,6 +5,7 @@ import LeftSide from "./LeftSide";
 import ModalImage from "react-modal-image";
 import { findDOMNode } from "react-dom";
 import $ from "jquery";
+import Popup from "./Popup";
 
 class ApartmentDetails extends Component {
 
@@ -14,6 +15,7 @@ class ApartmentDetails extends Component {
         console.log(this.props.match.params.dateFrom);
         this.state = {
             apartment: 0,
+            showPopup: false,
             idApartment: this.props.match.params.idApartment,
             dateFrom: this.props.match.params.dateFrom,
             dateTo: this.props.match.params.dateTo,
@@ -57,6 +59,11 @@ class ApartmentDetails extends Component {
         });
     }
 
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
 
     postData = (event) => {
         event.preventDefault();
@@ -66,6 +73,7 @@ class ApartmentDetails extends Component {
         } else {
             $("#error-booking").show(300);
         }
+        this.togglePopup();
     }
 
 
@@ -117,6 +125,14 @@ class ApartmentDetails extends Component {
                                             <form onSubmit={this.postData}>
                                                 <button className="button">Rezerwuje</button>
                                             </form>
+                                            {this.state.showPopup ?
+                                                <Popup
+                                                    text='Nowy apartament został dodany'
+                                                    url='/bookings'
+                                                    closePopup={this.togglePopup.bind(this)}
+                                                />
+                                                : null
+                                            }
                                             <div className="error" style={hide} id="error-booking">Nie można zarezerwować. Proszę wybrać termin w panelu bocznym</div>
                                         </div>
                                     </div>

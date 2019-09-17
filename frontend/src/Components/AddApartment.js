@@ -127,7 +127,8 @@ class AddApartment extends Component {
                                         <button className="button">Dodaj apartament</button>
                                         {this.state.showPopup ?
                                             <Popup
-                                                text='Nowy apartament został dodany'
+                                                text='Apartament został zarezerwowan'
+                                                url='/admin/apartments'
                                                 closePopup={this.togglePopup.bind(this)}
                                             />
                                             : null
