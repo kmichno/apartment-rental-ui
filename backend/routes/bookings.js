@@ -94,6 +94,43 @@ router.get('/show/all', function(req, res) {
     });
 });
 
+// Show my bookings
+router.get('/show/user/:id', function(req, res) {
+    Bookings.findAll({
+        include: [
+            {
+                model: Apartments,
+                as: 'apartment',
+                include:  {
+                    model: Gallery,
+                    where: {
+                        default:1
+                    },
+                    required: false
+                }
+            },
+        ],
+        attributes: {
+            include:
+                [
+                    [Sequelize.fn('date_format',Sequelize.col("start"),'%d.%m.%Y'),'startFormat'],
+                    [Sequelize.fn('date_format',Sequelize.col("end"),'%d.%m.%Y'),'endFormat'],
+                    [Sequelize.literal('DATEDIFF(end,start)+1'), 'rentingDays'],
+                    [Sequelize.fn("IFNULL",Sequelize.col("apartment->Gallery.fileGallery"),'default.png'),'filePath']
+                ]
+        },
+        where: {
+            idUser: req.params.id
+        },
+        order: [['idBooking', 'DESC']]}).
+    then(function(Bookings) {
+        res.status(200).json({result:Bookings});
+    }, function(error) {
+        console.log(error);
+        res.status(500).send({result:"error"});
+    });
+});
+
 // Booking Confirm
 router.put('/change/:id/confirm', function(req, res) {
      BookingsModel (sequelize).update({

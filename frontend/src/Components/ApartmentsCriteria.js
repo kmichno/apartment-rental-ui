@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
 import LeftSide from './LeftSide';
+import ModalImage from "react-modal-image";
 
 
 class ApartmentsCriteria extends Component {
@@ -88,9 +89,13 @@ class ApartmentsCriteria extends Component {
                     return (
                         <div className="apartment" key={apartment.idApartment}>
                             <div className="img">
-                                <div className="img-inner">
-                                    {apartment.filePath}
-                                </div>
+                                <ModalImage
+                                    className="picture-apartment"
+                                    small={"http://localhost:8080/uploads/"+apartment.filePath}
+                                    large={"http://localhost:8080/uploads/"+apartment.filePath}
+                                    hideDownload="true"
+                                    alt={apartment.nameApartment+" ("+apartment.city+")"}
+                                />
                             </div>
                             <div className="description-content">
                                 <h3>{apartment.nameApartment}</h3>

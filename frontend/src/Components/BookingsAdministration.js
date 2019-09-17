@@ -78,6 +78,25 @@ class BookingsAdministration extends Component{
             }));
         }
     }
+    bookingDelete(idBooking) {
+        const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+        });
+    }
+    handleBookingDelete (idBooking) {
+        console.log("Get request to delete id "+idBooking);
+        return event => {
+            event.preventDefault();
+            this.bookingDelete(idBooking);
+            let filteredArray = this.state.bookingsList.filter(item => idBooking != item.idBooking)
+            this.setState({bookingsList: filteredArray})
+        }
+    }
 
     render(){
         let bookings = this.state.bookingsList.map((book) => {
@@ -100,7 +119,10 @@ class BookingsAdministration extends Component{
                             <button className="button-details button-red" onClick={this.handleBookingCancel(book.idBooking)}>Anuluj</button>
                         </p>
                     ) : book.status === "canceled" ? (
-                            <b className="bookings-canceled">Anulowana</b>
+                        <p>
+                            <b className="bookings-canceled">Anulowana</b><br />
+                            <button className="button-details button-orange" onClick={this.handleBookingDelete(book.idBooking)}>Usuń</button>
+                        </p>
                     )
                     : ""}</td>
                 </tr>

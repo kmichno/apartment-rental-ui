@@ -63,17 +63,19 @@ export default class Menu extends Component {
         <div id="nav-bar">
             <ul>
                 <li><NavLink to="/">Strona Główna</NavLink></li>
-                <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
-                {global.isAdmin==1 ? (
-                    <li><NavLink to="/admin/dashboard"><span>Administracja</span></NavLink></li>
-                ) : ( "" )}
                 <Authentication authenticated={authenticated}
                                 handleNotAuthenticated={this._handleNotAuthenticated}/>
                  {!authenticated ? (
                      <li onClick={this._handleSignInClick}><NavLink to="#">Zaloguj</NavLink></li>
                     ) : (
+                     <React.Fragment>
+                     <li><NavLink to="/bookings">Moje rezerwacje</NavLink></li>
                      <li onClick={this._handleLogoutClick}><NavLink to="#">Wyloguj ({this.state.user.name})</NavLink></li>
-                    )}
+                     </React.Fragment>
+                         )}
+                {global.isAdmin==1 ? (
+                    <li><NavLink to="/admin/dashboard"><span>Panel Administracyjny</span></NavLink></li>
+                ) : ( "" )}
             </ul>
         </div>
         );

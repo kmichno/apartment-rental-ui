@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Footer from "./Footer";
 import Header from "./Header";
 import LeftSide from "./LeftSide";
+import ModalImage from "react-modal-image";
 
 class Bookings extends Component {
 
@@ -16,7 +17,7 @@ class Bookings extends Component {
     }
 
     componentDidMount() {
-        var url = "http://localhost:8080/bookings/show/all";
+        var url = "http://localhost:8080/bookings/show/user/"+global.idUser;
 
         fetch(url, {
             mode: 'cors',
@@ -36,9 +37,9 @@ class Bookings extends Component {
     }
 
     cancelBooking(idBooking) {
-        const url = "http://localhost:8080/bookings/change/"+idBooking+"/delete";
+        const url = "http://localhost:8080/bookings/change/"+idBooking+"/cancel";
         fetch(url, {
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -50,8 +51,14 @@ class Bookings extends Component {
         return event => {
             event.preventDefault();
             this.cancelBooking(idBooking);
-            let filteredArray = this.state.apartmentsList.filter(item => idBooking != item.idBooking)
-            this.setState({apartmentsList: filteredArray});
+            //let filteredArray = this.state.apartmentsList.filter(item => idBooking != item.idBooking)
+            //this.setState({apartmentsList: filteredArray});
+
+            this.setState(prevState => ({
+                apartmentsList: prevState.apartmentsList.map(
+                    obj => (obj.idBooking === idBooking ? Object.assign(obj, {status: "canceled"}) : obj)
+                )
+            }));
 
         }
     }
@@ -63,7 +70,13 @@ class Bookings extends Component {
             return (
                 <div className="apartment" key={booking.idBooking}>
                     <div className="img">
-                        {booking.apartment.Gallery != null ? booking.apartment.Gallery.fileGallery : ""}
+                        <ModalImage
+                            className="picture-apartment"
+                            small={"http://localhost:8080/uploads/"+booking.filePath}
+                            large={"http://localhost:8080/uploads/"+booking.filePath}
+                            hideDownload="true"
+                            alt={booking.apartment.nameApartment+" ("+booking.apartment.city+")"}
+                        />
                     </div>
                     <div className="description-content">
                         <h3>{booking.apartment.nameApartment}</h3>
@@ -84,12 +97,15 @@ class Bookings extends Component {
                             <p>Od {booking.start} do {booking.end}</p>
                             <p>Max. ilość osób: {booking.apartment.numberPeople}</p>
                             <p>Cena: {booking.apartment.priceDay} zł (1 dzień)</p>
+                            <p>Cena: {booking.rentingDays * booking.apartment.priceDay} zł (za {booking.rentingDays} {booking.rentingDays == 1 ? "dzień" : "dni"})</p>
                         </div>
+                        {booking.status === "unconfirmed" || booking.status === "confirmed" ? (
                         <div className="place-button">
                             <form onSubmit={this.handleSubmit(booking.idBooking)}>
                                 <button className="button">Anuluj rezerwacje</button>
                             </form>
                         </div>
+                        ) : ""}
                     </div>
                 </div>
             )
