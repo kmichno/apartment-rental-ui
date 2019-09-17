@@ -71,6 +71,10 @@ router.get('/show/all', function(req, res) {
                     required: false
                 }
             },
+            {
+            model: Users,
+            required: false
+        },
  /*           {
                 model: Users,
                 required: false

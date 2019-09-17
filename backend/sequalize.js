@@ -21,4 +21,6 @@ Apartments.hasOne(Gallery, {foreignKey: 'idApartment', allowNull:true});
 //Users.belongsTo(Bookings, { as:'booking', foreignKey: 'idUser', allowNull:true});
 //Bookings.hasOne(Users, {foreignKey: 'idUser', allowNull:true});
 
+Bookings.belongsTo(Users, {foreignKey: 'idUser'});
+
 module.exports = { Apartments ,Bookings,Gallery, Users};

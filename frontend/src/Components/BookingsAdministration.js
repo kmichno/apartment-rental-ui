@@ -104,9 +104,8 @@ class BookingsAdministration extends Component{
                 <tbody>
                 <tr key={book.idBooking}>
                     <td>{book.idBooking}</td>
-                    <td><NavLink className="no-decoration" to={"/apartment/details/"+book.apartment.idApartment}>{book.apartment.nameApartment} ({book.apartment.city})</NavLink></td>
-                    <td>{book.startFormat}r - {book.endFormat}r</td>
-                    <td>
+                    <td><NavLink className="no-decoration" to={"/apartment/details/"+book.apartment.idApartment}>{book.apartment.nameApartment} ({book.apartment.city})</NavLink><br />Rezerwujący: {book.User.name}</td>
+                    <td>{book.startFormat}r - {book.endFormat}r<br /><br />
                         1 dzień - {book.apartment.priceDay} zł<br />
                         {book.rentingDays} dni - {book.rentingDays * book.apartment.priceDay} zł
                     </td>
@@ -153,7 +152,6 @@ class BookingsAdministration extends Component{
                                             <th>ID</th>
                                             <th>Apartament</th>
                                             <th>Termin</th>
-                                            <th>Cena</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>

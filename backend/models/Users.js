@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize, type) => {
     const users=sequelize.define('Users',{
         "idUser": {
-            type: Sequelize.DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
