@@ -79,7 +79,7 @@ router.get('/show/:start/:end/:numberPeople/:city', function(req, res) {
                 [Sequelize.Op.like]: req.params.city
             },
             numberPeople: {
-                [Sequelize.Op.eq]: req.params.numberPeople
+                [Sequelize.Op.gte]: req.params.numberPeople
             }
         }
     }).
@@ -167,7 +167,9 @@ router.get('/show/:id', function(req, res) {
 
 // Upload photo
 router.post('/upload-photo', function(req, res) {
-    const upload = multer({ storage }).single('image')
+    const upload = multer({ storage }).single('file')
+    console.log(req.file)
+    console.log(req.body)
     upload(req, res, function(err) {
         if (err) {
             res.status(400).json({ result: "error" });
@@ -176,7 +178,7 @@ router.post('/upload-photo', function(req, res) {
 
         var insertGallery = {
             "idApartment": req.body.id,
-            "fileGallery": req.file.filename,
+            "fileGallery": req.file.name,
             "default": 0,
         }
         GalleryModel (sequelize).create(insertGallery).
