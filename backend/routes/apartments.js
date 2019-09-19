@@ -79,7 +79,7 @@ router.get('/show/:start/:end/:numberPeople/:city', function(req, res) {
                 [Sequelize.Op.like]: req.params.city
             },
             numberPeople: {
-                [Sequelize.Op.eq]: req.params.numberPeople
+                [Sequelize.Op.gte]: req.params.numberPeople
             }
         }
     }).
